@@ -25,17 +25,12 @@ function timeToMinutes(time: string): number {
     return hours * 60 + minutes
 }
 
-function isOnline(room: string): boolean {
-    return room.toUpperCase().startsWith("VR")
-}
-
 function findOverlappingDays(a: Subject, b: Subject): string[] {
     const days: string[] = []
 
     for (const sa of a.schedules) {
         for (const sb of b.schedules) {
             if (sa.day !== sb.day) continue
-            if (isOnline(sa.room) !== isOnline(sb.room)) continue
 
             const aStart = timeToMinutes(sa.start)
             const aEnd = timeToMinutes(sa.end)
