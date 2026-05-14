@@ -4,8 +4,6 @@ export const DEFAULT_SECTION_NAME = "Section 1"
 export const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"] as const
 export type Day = typeof DAYS[number]
 
-export const START_HOUR = 7
-export const END_HOUR = 21
 export const CELL_HEIGHT = 60
 
 export const SUBJECT_CODE_RE = /^([A-Z]{2,}[A-Z0-9]+)(?:\s|$)/
