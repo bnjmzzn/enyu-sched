@@ -48,7 +48,7 @@ export function useScheduleTable() {
         )
     }
 
-    function handleExport() {
+    function handleExportPNG() {
         if (!tableRef.current) return
         domtoimage.toPng(tableRef.current).then((dataUrl) => {
             const link = document.createElement("a")
@@ -58,15 +58,44 @@ export function useScheduleTable() {
         })
     }
 
+    function handleExportText() {
+        const lines: string[] = []
+    
+        if (tableTitle.trim().length > 0) {
+            lines.push(tableTitle.trim())
+            lines.push("")
+        }
+    
+        const usedDays = [...new Set(enabledCourses.flatMap((c) => c.schedules.map((s) => s.day)))]
+    
+        for (const day of usedDays) {
+            const blocks = getBlocksForDay(day)
+            if (blocks.length === 0) continue
+    
+            lines.push(`[${day}]`)
+            lines.push("")
+    
+            for (const block of blocks) {
+                lines.push(`${block.course.code} (${block.course.sectionName})`)
+                lines.push(`${block.schedule.start} - ${block.schedule.end} ${block.schedule.room}`)
+                lines.push("")
+            }
+        }
+    
+        navigator.clipboard.writeText(lines.join("\n"))
+        alert("copied")
+    }
+
     return { 
         tableRef,
         hours,
         startHour,
         totalHeight,
         getBlocksForDay,
-        handleExport, 
+        handleExportPNG, 
         formatHour,
         tableTitle, 
-        setTableTitle
+        setTableTitle,
+        handleExportText,
     }
 }

@@ -9,7 +9,8 @@ export default function ScheduleTable() {
         startHour,
         totalHeight,
         getBlocksForDay,
-        handleExport,
+        handleExportPNG,
+        handleExportText,
         formatHour,
         tableTitle,
         setTableTitle
@@ -17,12 +18,6 @@ export default function ScheduleTable() {
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="flex justify-end">
-                <Button onClick={handleExport}>export png</Button>
-            </div>
-
-            
-
             <div ref={tableRef} className="overflow-auto bg-white p-2">
 
                 <input
@@ -91,6 +86,10 @@ export default function ScheduleTable() {
                         })}
                     </div>
                 </div>
+            </div>
+            <div className="flex justify-end">
+                <Button onClick={handleExportText}>export txt</Button>
+                <Button onClick={handleExportPNG}>export png</Button>
             </div>
         </div>
     )
