@@ -25,6 +25,10 @@ export function useSectionPanel(section: Section) {
     }
 
     function handleRemove() {
+        if (section.courses.length > 0) {
+            const confirmed = window.confirm(`"${section.name}" has ${section.courses.length} course${section.courses.length > 1 ? "s" : ""}. Remove anyway?`)
+            if (!confirmed) return
+        }
         removeSection(section.id)
     }
 
