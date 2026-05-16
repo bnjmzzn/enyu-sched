@@ -1,14 +1,14 @@
 import { useStore, type Course } from "./store"
 import { timeToMinutes } from "./time"
 
-export type Conflict = {
-    codeA: string
-    codeB: string
-    reason: string
+export type Issue = {
+    id: string
+    message: string
 }
 
-export type ConflictResult = {
-    conflicts: Conflict[]
+export type ValidationResult = {
+    issues: Issue[]
+    hasIssues: boolean
     conflictKeys: Set<string>
 }
 
@@ -33,16 +33,22 @@ function findOverlappingDays(a: Course, b: Course): string[] {
     return days
 }
 
-export function useConflicts(): ConflictResult {
-    const sections = useStore((s) => s.sections)
+export function useValidation(): ValidationResult {
+    const { sections, maxUnits } = useStore()
 
-    const enabled = sections
-        .flatMap((s) => s.courses)
-        .filter((s) => s.enabled)
+    const enabled = sections.flatMap((s) => s.courses).filter((c) => c.enabled)
 
-    const conflicts: Conflict[] = []
+    const totalUnits = enabled.reduce((sum, c) => sum + c.unit, 0)
+    const issues: Issue[] = []
     const conflictKeys = new Set<string>()
     const seen = new Set<string>()
+
+    if (totalUnits > maxUnits) {
+        issues.push({
+            id: "over-limit",
+            message: `unit limit exceeded (${totalUnits.toFixed(1)} / ${maxUnits})`,
+        })
+    }
 
     for (let i = 0; i < enabled.length; i++) {
         for (let j = i + 1; j < enabled.length; j++) {
@@ -54,7 +60,7 @@ export function useConflicts(): ConflictResult {
             seen.add(pairKey)
 
             if (a.code === b.code) {
-                conflicts.push({ codeA: a.code, codeB: b.code, reason: `duplicate: ${a.code}` })
+                issues.push({ id: pairKey, message: `duplicate: ${a.code}` })
                 a.schedules.forEach((s) => conflictKeys.add(`${a.id}:${s.day}`))
                 b.schedules.forEach((s) => conflictKeys.add(`${b.id}:${s.day}`))
                 continue
@@ -63,10 +69,9 @@ export function useConflicts(): ConflictResult {
             const overlappingDays = findOverlappingDays(a, b)
             if (overlappingDays.length === 0) continue
 
-            conflicts.push({
-                codeA: a.code,
-                codeB: b.code,
-                reason: `${a.code} and ${b.code} overlap on ${overlappingDays.join(", ")}`,
+            issues.push({
+                id: pairKey,
+                message: `${a.code} and ${b.code} overlap on ${overlappingDays.join(", ")}`,
             })
 
             overlappingDays.forEach((day) => {
@@ -76,5 +81,5 @@ export function useConflicts(): ConflictResult {
         }
     }
 
-    return { conflicts, conflictKeys }
+    return { issues, hasIssues: issues.length > 0, conflictKeys }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Sidebar from "./components/sidebar/Sidebar"
 import ScheduleTable from "./components/table/ScheduleTable"
 import StatsBar from "./components/summary/StatsBar"
-import ConflictList from "./components/summary/ConflictList"
+import ConflictList from "./components/summary/ErrorList"
 
 export default function App() {
     const [sidebarOpen, setSidebarOpen] = useState(true)

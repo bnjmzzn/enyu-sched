@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import domtoimage from "dom-to-image"
 import { useStore } from "../../lib/store"
-import { useConflicts } from "../../lib/useConflicts"
+import { useConflicts } from "../../lib/useValidation"
 import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 
