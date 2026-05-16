@@ -1,4 +1,5 @@
 import type { ParsedSubject } from "../../lib/parser"
+import Card from "../../ui/Card"
 
 type Props = {
     subject: ParsedSubject
@@ -6,7 +7,7 @@ type Props = {
 
 export default function ParsedSubjectCard({ subject }: Props) {
     return (
-        <div className="border border-gray-200 rounded p-2 flex flex-col gap-1">
+        <Card>
             <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold">{subject.code}</span>
                 <span className="text-xs text-gray-400">{subject.unit.toFixed(1)} units</span>
@@ -18,6 +19,6 @@ export default function ParsedSubjectCard({ subject }: Props) {
                     </span>
                 ))}
             </div>
-        </div>
+        </Card>
     )
 }

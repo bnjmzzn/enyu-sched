@@ -1,4 +1,5 @@
 import { useStore, type Subject } from "./store"
+import { timeToMinutes } from "./time"
 
 export type Conflict = {
     codeA: string
@@ -9,20 +10,6 @@ export type Conflict = {
 export type ConflictResult = {
     conflicts: Conflict[]
     conflictKeys: Set<string>
-}
-
-function timeToMinutes(time: string): number {
-    const match = time.match(/^(\d{1,2}):(\d{2})(AM|PM)$/)
-    if (!match) return 0
-
-    let hours = parseInt(match[1])
-    const minutes = parseInt(match[2])
-    const period = match[3]
-
-    if (period === "PM" && hours !== 12) hours += 12
-    if (period === "AM" && hours === 12) hours = 0
-
-    return hours * 60 + minutes
 }
 
 function findOverlappingDays(a: Subject, b: Subject): string[] {

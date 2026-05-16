@@ -1,46 +1,34 @@
-import { useRef, useState } from "react"
 import { useStore, type Section } from "../../lib/store"
+import { useSectionPanel } from "./useSectionPanel"
 import SubjectRow from "./SubjectRow"
 import AddSubjectsModal from "./AddSubjectsModal"
+import Button from "../../ui/Button"
+import Checkbox from "../../ui/Checkbox"
 
 type Props = {
     section: Section
 }
 
 export default function SectionPanel({ section }: Props) {
-    const { renameSection, removeSection, toggleAllSubjects } = useStore()
-    const [collapsed, setCollapsed] = useState(false)
-    const [showModal, setShowModal] = useState(false)
-    const [editing, setEditing] = useState(false)
-    const [nameInput, setNameInput] = useState(section.name)
-    const checkboxRef = useRef<HTMLInputElement>(null)
-
-    const allEnabled = section.subjects.every((s) => s.enabled)
-    const someEnabled = section.subjects.some((s) => s.enabled)
-    const isIndeterminate = someEnabled && !allEnabled
-
-    if (checkboxRef.current) {
-        checkboxRef.current.indeterminate = isIndeterminate
-    }
-
-    function handleSectionToggle() {
-        toggleAllSubjects(section.id, !allEnabled)
-    }
-
-    function handleRename() {
-        const trimmed = nameInput.trim()
-        if (trimmed.length > 0) renameSection(section.id, trimmed)
-        else setNameInput(section.name)
-        setEditing(false)
-    }
+    const { toggleSubject, removeSubject } = useStore()
+    const {
+        collapsed, setCollapsed,
+        showModal, setShowModal,
+        editing, setEditing,
+        nameInput, setNameInput,
+        allEnabled,
+        isIndeterminate,
+        handleSectionToggle,
+        handleRename,
+        handleRemove,
+    } = useSectionPanel(section)
 
     return (
         <div className="border border-gray-200 rounded-lg overflow-hidden">
             <div className="flex items-center gap-2 px-3 py-2 bg-gray-50">
-                <input
-                    ref={checkboxRef}
-                    type="checkbox"
+                <Checkbox
                     checked={allEnabled}
+                    indeterminate={isIndeterminate}
                     onChange={handleSectionToggle}
                 />
 
@@ -70,18 +58,8 @@ export default function SectionPanel({ section }: Props) {
                 )}
 
                 <div className="flex items-center gap-1 shrink-0">
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="text-xs px-2 py-1 rounded border border-gray-300 hover:bg-gray-100"
-                    >
-                        + add
-                    </button>
-                    <button
-                        onClick={() => removeSection(section.id)}
-                        className="text-xs px-2 py-1 rounded border border-gray-300 text-red-500 hover:bg-red-50"
-                    >
-                        remove
-                    </button>
+                    <Button onClick={() => setShowModal(true)}>+ add</Button>
+                    <Button variant="danger" onClick={handleRemove}>remove</Button>
                 </div>
             </div>
 
@@ -93,8 +71,9 @@ export default function SectionPanel({ section }: Props) {
                     {section.subjects.map((subject) => (
                         <SubjectRow
                             key={subject.id}
-                            sectionId={section.id}
                             subject={subject}
+                            onToggle={() => toggleSubject(section.id, subject.id)}
+                            onRemove={() => removeSubject(section.id, subject.id)}
                         />
                     ))}
                 </div>

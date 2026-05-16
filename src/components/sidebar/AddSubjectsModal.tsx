@@ -2,6 +2,8 @@ import { useState } from "react"
 import { parseScheduleString, type ParsedSubject } from "../../lib/parser"
 import { useStore } from "../../lib/store"
 import ParsedSubjectCard from "./ParsedSubjectCard"
+import Modal from "../../ui/Modal"
+import Button from "../../ui/Button"
 
 type Props = {
     sectionId: string
@@ -18,6 +20,9 @@ export default function AddSubjectsModal({ sectionId, onClose }: Props) {
 
     const isEmpty = input.trim().length === 0
     const hasNoResults = !isEmpty && parsed.length === 0
+    const addLabel = parsed.length > 0
+        ? `add ${parsed.length} subject${parsed.length > 1 ? "s" : ""}`
+        : "add"
 
     function handleConfirm() {
         if (parsed.length === 0) return
@@ -25,18 +30,18 @@ export default function AddSubjectsModal({ sectionId, onClose }: Props) {
         onClose()
     }
 
-    function handleBackdropClick(e: React.MouseEvent<HTMLDivElement>) {
-        if (e.target === e.currentTarget) onClose()
-    }
+    const footer = (
+        <div className="flex justify-end gap-2">
+            <Button onClick={onClose}>cancel</Button>
+            <Button variant="primary" disabled={parsed.length === 0} onClick={handleConfirm}>
+                {addLabel}
+            </Button>
+        </div>
+    )
 
     return (
-        <div
-            onClick={handleBackdropClick}
-            className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-        >
-            <div className="bg-white rounded-lg p-6 w-[520px] max-h-[80vh] overflow-y-auto flex flex-col gap-4">
-                <h2 className="text-sm font-semibold">add subjects</h2>
-
+        <Modal title="add subjects" onClose={onClose} footer={footer}>
+            <div className="flex flex-col gap-4">
                 <textarea
                     rows={8}
                     value={input}
@@ -60,25 +65,7 @@ export default function AddSubjectsModal({ sectionId, onClose }: Props) {
                         </>
                     )}
                 </div>
-
-                <div className="flex gap-2 justify-end">
-                    <button
-                        onClick={onClose}
-                        className="text-sm px-3 py-1.5 rounded border border-gray-300 hover:bg-gray-50"
-                    >
-                        cancel
-                    </button>
-                    <button
-                        onClick={handleConfirm}
-                        disabled={parsed.length === 0}
-                        className="text-sm px-3 py-1.5 rounded bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed"
-                    >
-                        {parsed.length > 0
-                            ? `add ${parsed.length} subject${parsed.length > 1 ? "s" : ""}`
-                            : "add"}
-                    </button>
-                </div>
             </div>
-        </div>
+        </Modal>
     )
 }
