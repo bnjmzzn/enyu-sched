@@ -1,7 +1,7 @@
 import { useRef } from "react"
 import domtoimage from "dom-to-image"
 import { useStore } from "../../lib/store"
-import { useConflicts } from "../../lib/useValidation"
+import { useValidation } from "../../lib/useValidation"
 import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 
@@ -10,7 +10,7 @@ export function useScheduleTable() {
     const setTableTitle = useStore((s) => s.setTableTitle)
 
     const sections = useStore((s) => s.sections)
-    const { conflictKeys } = useConflicts()
+    const { conflictKeys } = useValidation()
     const tableRef = useRef<HTMLDivElement>(null)
 
     const enabledCourses = sections.flatMap((section) => {
