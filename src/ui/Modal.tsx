@@ -1,3 +1,5 @@
+import { createPortal } from "react-dom"
+
 type Props = {
     onClose: () => void
     title?: string
@@ -10,7 +12,7 @@ export default function Modal({ onClose, title, children, footer }: Props) {
         if (e.target === e.currentTarget) onClose()
     }
 
-    return (
+    return createPortal(
         <div onClick={handleBackdropClick} className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg w-[520px] max-h-[80vh] flex flex-col">
                 {title && (
@@ -27,6 +29,7 @@ export default function Modal({ onClose, title, children, footer }: Props) {
                     </div>
                 )}
             </div>
-        </div>
+        </div>,
+        document.body
     )
 }
