@@ -23,10 +23,10 @@ export default function App() {
                 />
             )}
 
-            <div className="flex flex-col flex-1 overflow-hidden p-4 gap-3 min-w-0">
+            <div className="flex flex-col flex-1 overflow-scroll p-4 gap-3 min-w-0">
+                <ScheduleTable />
                 <StatsBar />
                 <ConflictList />
-                <ScheduleTable />
             </div>
         </div>
     )
