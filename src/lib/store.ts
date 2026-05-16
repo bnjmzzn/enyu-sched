@@ -27,6 +27,8 @@ type Store = {
     removeCourse: (sectionId: string, courseId: string) => void
     toggleCourse: (sectionId: string, courseId: string) => void
     toggleAllCourses: (sectionId: string, enabled: boolean) => void
+    tableTitle: string
+    setTableTitle: (title: string) => void
 }
 
 function generateId(): string {
@@ -44,6 +46,9 @@ function parsedToCourse(parsed: ParsedCourse): Course {
 }
 
 export const useStore = create<Store>((set) => ({
+    tableTitle: "My Table",
+    setTableTitle: (title) => set({ tableTitle: title }),
+
     maxUnits: DEFAULT_MAX_UNITS,
     sections: [
         {

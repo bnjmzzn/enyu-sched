@@ -6,6 +6,9 @@ import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 
 export function useScheduleTable() {
+    const tableTitle = useStore((s) => s.tableTitle)
+    const setTableTitle = useStore((s) => s.setTableTitle)
+
     const sections = useStore((s) => s.sections)
     const { conflictKeys } = useConflicts()
     const tableRef = useRef<HTMLDivElement>(null)
@@ -55,5 +58,15 @@ export function useScheduleTable() {
         })
     }
 
-    return { tableRef, hours, startHour, totalHeight, getBlocksForDay, handleExport, formatHour }
+    return { 
+        tableRef,
+        hours,
+        startHour,
+        totalHeight,
+        getBlocksForDay,
+        handleExport, 
+        formatHour,
+        tableTitle, 
+        setTableTitle
+    }
 }

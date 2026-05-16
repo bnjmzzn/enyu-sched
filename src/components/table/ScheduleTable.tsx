@@ -3,7 +3,17 @@ import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
 
 export default function ScheduleTable() {
-    const { tableRef, hours, startHour, totalHeight, getBlocksForDay, handleExport, formatHour } = useScheduleTable()
+    const {
+        tableRef,
+        hours,
+        startHour,
+        totalHeight,
+        getBlocksForDay,
+        handleExport,
+        formatHour,
+        tableTitle,
+        setTableTitle
+    } = useScheduleTable()
 
     return (
         <div className="flex flex-col gap-2">
@@ -11,7 +21,18 @@ export default function ScheduleTable() {
                 <Button onClick={handleExport}>export png</Button>
             </div>
 
+            
+
             <div ref={tableRef} className="overflow-auto bg-white p-2">
+
+                <input
+                    type="text"
+                    value={tableTitle}
+                    onChange={(e) => setTableTitle(e.target.value)}
+                    placeholder="schedule title..."
+                    className="text-sm border-b border-gray-300 focus:outline-none mb-2"
+                />
+
                 <div className="flex text-xs text-gray-400 mb-1 ml-10">
                     {DAYS.map((day) => (
                         <div key={day} className="flex-1 text-center">{day}</div>
