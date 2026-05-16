@@ -61,6 +61,7 @@ export default function ScheduleTable() {
                                         >
                                             <span className="font-semibold leading-tight block">{block.course.code}</span>
                                             <span className="opacity-70 leading-tight block">{block.schedule.room}</span>
+                                            <span className="opacity-70 leading-tight block">{block.course.sectionName}</span>
                                         </div>
                                     ))}
                                 </div>

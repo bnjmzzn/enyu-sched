@@ -10,9 +10,10 @@ export function useScheduleTable() {
     const { conflictKeys } = useConflicts()
     const tableRef = useRef<HTMLDivElement>(null)
 
-    const enabledCourses = sections
-        .flatMap((s) => s.courses)
-        .filter((s) => s.enabled)
+    const enabledCourses = sections.flatMap((section) => {
+        const active = section.courses.filter((c) => c.enabled)
+        return active.map((c) => ({ ...c, sectionName: section.name }))
+    })
 
     const allSchedules = enabledCourses.flatMap((s) => s.schedules)
 
@@ -38,7 +39,7 @@ export function useScheduleTable() {
                     const top = (startMin / totalMinutes) * totalHeight
                     const height = ((endMin - startMin) / totalMinutes) * totalHeight
                     const isConflict = conflictKeys.has(`${course.id}:${day}`)
-
+    
                     return { course, schedule, top, height, isConflict }
                 })
         )
