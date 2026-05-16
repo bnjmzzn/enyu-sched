@@ -3,6 +3,7 @@ import Sidebar from "./components/sidebar/Sidebar"
 import ScheduleTable from "./components/table/ScheduleTable"
 import StatsBar from "./components/summary/StatsBar"
 import ConflictList from "./components/summary/ErrorList"
+import CourseListPanel from "./components/summary/CoursePanel"
 
 export default function App() {
     const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -27,6 +28,7 @@ export default function App() {
                 <ScheduleTable />
                 <StatsBar />
                 <ConflictList />
+                <CourseListPanel />
             </div>
         </div>
     )
