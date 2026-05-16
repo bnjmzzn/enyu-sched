@@ -1,8 +1,10 @@
 import { useState, useRef } from "react"
 import { useStore, type Section } from "../../lib/store"
+import { useUI } from "../../lib/ui"
 
 export function useSectionPanel(section: Section) {
     const { renameSection, removeSection, toggleAllCourses } = useStore()
+    const { showConfirm } = useUI()
     const [collapsed, setCollapsed] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [editing, setEditing] = useState(false)
@@ -25,9 +27,15 @@ export function useSectionPanel(section: Section) {
     }
 
     function handleRemove() {
-        if (section.courses.length > 0) {
-            const confirmed = window.confirm(`"${section.name}" has ${section.courses.length} course${section.courses.length > 1 ? "s" : ""}. Remove anyway?`)
-            if (!confirmed) return
+        const count = section.courses.length
+        if (count > 0) {
+            showConfirm({
+                title: `remove "${section.name}"?`,
+                message: `This section has ${count} course${count > 1 ? "s" : ""}. This cannot be undone.`,
+                confirmLabel: "remove section",
+                onConfirm: () => removeSection(section.id),
+            })
+            return
         }
         removeSection(section.id)
     }

@@ -4,6 +4,8 @@ import ScheduleTable from "./components/table/ScheduleTable"
 import StatsBar from "./components/summary/StatsBar"
 import ConflictList from "./components/summary/ErrorList"
 import CourseListPanel from "./components/summary/CoursePanel"
+import Toaster from "./ui/Toaster"
+import ConfirmDialog from "./ui/ConfirmDialog"
 
 export default function App() {
     const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -30,6 +32,9 @@ export default function App() {
                 <ConflictList />
                 <CourseListPanel />
             </div>
+
+            <Toaster />
+            <ConfirmDialog />
         </div>
     )
 }
