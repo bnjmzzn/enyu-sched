@@ -51,7 +51,7 @@ export default function ScheduleTable() {
 
                                     {blocks.map((block, i) => (
                                         <div
-                                            key={`${block.subject.id}-${i}`}
+                                            key={`${block.course.id}-${i}`}
                                             className={`absolute inset-x-0.5 rounded text-xs p-1 overflow-hidden ${
                                                 block.isConflict
                                                     ? "bg-red-100 border border-red-300 text-red-700 opacity-50"
@@ -59,7 +59,7 @@ export default function ScheduleTable() {
                                             }`}
                                             style={{ top: block.top, height: block.height }}
                                         >
-                                            <span className="font-semibold leading-tight block">{block.subject.code}</span>
+                                            <span className="font-semibold leading-tight block">{block.course.code}</span>
                                             <span className="opacity-70 leading-tight block">{block.schedule.room}</span>
                                         </div>
                                     ))}

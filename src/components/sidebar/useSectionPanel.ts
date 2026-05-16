@@ -2,19 +2,19 @@ import { useState, useRef } from "react"
 import { useStore, type Section } from "../../lib/store"
 
 export function useSectionPanel(section: Section) {
-    const { renameSection, removeSection, toggleAllSubjects } = useStore()
+    const { renameSection, removeSection, toggleAllCourses } = useStore()
     const [collapsed, setCollapsed] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [editing, setEditing] = useState(false)
     const [nameInput, setNameInput] = useState(section.name)
     const checkboxRef = useRef<HTMLInputElement>(null)
 
-    const allEnabled = section.subjects.every((s) => s.enabled)
-    const someEnabled = section.subjects.some((s) => s.enabled)
+    const allEnabled = section.courses.every((s) => s.enabled)
+    const someEnabled = section.courses.some((s) => s.enabled)
     const isIndeterminate = someEnabled && !allEnabled
 
     function handleSectionToggle() {
-        toggleAllSubjects(section.id, !allEnabled)
+        toggleAllCourses(section.id, !allEnabled)
     }
 
     function handleRename() {

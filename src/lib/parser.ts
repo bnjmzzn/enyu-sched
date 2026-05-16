@@ -7,24 +7,24 @@ export type Schedule = {
     room: string
 }
 
-export type ParsedSubject = {
+export type ParsedCourse = {
     code: string
     unit: number
     schedules: Schedule[]
 }
 
-export function parseScheduleString(input: string): ParsedSubject[] {
+export function parseScheduleString(input: string): ParsedCourse[] {
     const lines = input
         .split("\n")
         .map((l) => l.trim())
         .filter((l) => l.length > 0)
 
-    const results: ParsedSubject[] = []
-    let current: ParsedSubject | null = null
+    const results: ParsedCourse[] = []
+    let current: ParsedCourse | null = null
 
     for (const line of lines) {
         const scheduleMatch = line.match(SCHEDULE_LINE_RE)
-        const subjectMatch = line.match(SUBJECT_CODE_RE)
+        const courseMatch = line.match(SUBJECT_CODE_RE)
         const unitMatch = line.match(UNIT_RE)
 
         if (scheduleMatch) {
@@ -43,13 +43,13 @@ export function parseScheduleString(input: string): ParsedSubject[] {
             continue
         }
 
-        if (subjectMatch) {
+        if (courseMatch) {
             if (current) results.push(current)
 
             const unit = unitMatch ? parseFloat(unitMatch[1]) : 0
-            current = { code: subjectMatch[1], unit, schedules: [] }
+            current = { code: courseMatch[1], unit, schedules: [] }
 
-            const rest = line.slice(subjectMatch[0].length).trim()
+            const rest = line.slice(courseMatch[0].length).trim()
             const inlineSchedule = rest.match(SCHEDULE_LINE_RE)
             if (inlineSchedule) {
                 current.schedules.push({

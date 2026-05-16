@@ -10,11 +10,11 @@ export function useScheduleTable() {
     const { conflictKeys } = useConflicts()
     const tableRef = useRef<HTMLDivElement>(null)
 
-    const enabledSubjects = sections
-        .flatMap((s) => s.subjects)
+    const enabledCourses = sections
+        .flatMap((s) => s.courses)
         .filter((s) => s.enabled)
 
-    const allSchedules = enabledSubjects.flatMap((s) => s.schedules)
+    const allSchedules = enabledCourses.flatMap((s) => s.schedules)
 
     const startHour = allSchedules.length > 0
         ? Math.max(0, Math.floor(Math.min(...allSchedules.map((s) => timeToMinutes(s.start))) / 60) - 1)
@@ -29,17 +29,17 @@ export function useScheduleTable() {
     const hours = Array.from({ length: endHour - startHour }, (_, i) => startHour + i)
 
     function getBlocksForDay(day: string) {
-        return enabledSubjects.flatMap((subject) =>
-            subject.schedules
+        return enabledCourses.flatMap((course) =>
+            course.schedules
                 .filter((s) => s.day === day)
                 .map((schedule) => {
                     const startMin = timeToMinutes(schedule.start) - startHour * 60
                     const endMin = timeToMinutes(schedule.end) - startHour * 60
                     const top = (startMin / totalMinutes) * totalHeight
                     const height = ((endMin - startMin) / totalMinutes) * totalHeight
-                    const isConflict = conflictKeys.has(`${subject.id}:${day}`)
+                    const isConflict = conflictKeys.has(`${course.id}:${day}`)
 
-                    return { subject, schedule, top, height, isConflict }
+                    return { course, schedule, top, height, isConflict }
                 })
         )
     }

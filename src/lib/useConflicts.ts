@@ -1,4 +1,4 @@
-import { useStore, type Subject } from "./store"
+import { useStore, type Course } from "./store"
 import { timeToMinutes } from "./time"
 
 export type Conflict = {
@@ -12,7 +12,7 @@ export type ConflictResult = {
     conflictKeys: Set<string>
 }
 
-function findOverlappingDays(a: Subject, b: Subject): string[] {
+function findOverlappingDays(a: Course, b: Course): string[] {
     const days: string[] = []
 
     for (const sa of a.schedules) {
@@ -37,7 +37,7 @@ export function useConflicts(): ConflictResult {
     const sections = useStore((s) => s.sections)
 
     const enabled = sections
-        .flatMap((s) => s.subjects)
+        .flatMap((s) => s.courses)
         .filter((s) => s.enabled)
 
     const conflicts: Conflict[] = []

@@ -1,7 +1,7 @@
 import { useStore, type Section } from "../../lib/store"
 import { useSectionPanel } from "./useSectionPanel"
-import SubjectRow from "./SubjectRow"
-import AddSubjectsModal from "./AddSubjectsModal"
+import CourseRow from "./CourseRow"
+import AddCoursesModal from "./AddCourseModal"
 import Button from "../../ui/Button"
 import Checkbox from "../../ui/Checkbox"
 
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function SectionPanel({ section }: Props) {
-    const { toggleSubject, removeSubject } = useStore()
+    const { toggleCourse, removeCourse } = useStore()
     const {
         collapsed, setCollapsed,
         showModal, setShowModal,
@@ -65,22 +65,22 @@ export default function SectionPanel({ section }: Props) {
 
             {!collapsed && (
                 <div className="px-3 py-2">
-                    {section.subjects.length === 0 && (
-                        <p className="text-xs text-gray-400 py-1">no subjects yet.</p>
+                    {section.courses.length === 0 && (
+                        <p className="text-xs text-gray-400 py-1">no courses yet.</p>
                     )}
-                    {section.subjects.map((subject) => (
-                        <SubjectRow
-                            key={subject.id}
-                            subject={subject}
-                            onToggle={() => toggleSubject(section.id, subject.id)}
-                            onRemove={() => removeSubject(section.id, subject.id)}
+                    {section.courses.map((course) => (
+                        <CourseRow
+                            key={course.id}
+                            course={course}
+                            onToggle={() => toggleCourse(section.id, course.id)}
+                            onRemove={() => removeCourse(section.id, course.id)}
                         />
                     ))}
                 </div>
             )}
 
             {showModal && (
-                <AddSubjectsModal
+                <AddCoursesModal
                     sectionId={section.id}
                     onClose={() => setShowModal(false)}
                 />

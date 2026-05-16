@@ -1,8 +1,8 @@
 import { create } from "zustand"
-import type { ParsedSubject, Schedule } from "./parser"
+import type { ParsedCourse, Schedule } from "./parser"
 import { DEFAULT_MAX_UNITS, DEFAULT_SECTION_NAME } from "./config"
 
-export type Subject = {
+export type Course = {
     id: string
     code: string
     unit: number
@@ -13,7 +13,7 @@ export type Subject = {
 export type Section = {
     id: string
     name: string
-    subjects: Subject[]
+    courses: Course[]
 }
 
 type Store = {
@@ -23,17 +23,17 @@ type Store = {
     addSection: () => void
     renameSection: (sectionId: string, name: string) => void
     removeSection: (sectionId: string) => void
-    addSubjects: (sectionId: string, parsed: ParsedSubject[]) => void
-    removeSubject: (sectionId: string, subjectId: string) => void
-    toggleSubject: (sectionId: string, subjectId: string) => void
-    toggleAllSubjects: (sectionId: string, enabled: boolean) => void
+    addCourses: (sectionId: string, parsed: ParsedCourse[]) => void
+    removeCourse: (sectionId: string, courseId: string) => void
+    toggleCourse: (sectionId: string, courseId: string) => void
+    toggleAllCourses: (sectionId: string, enabled: boolean) => void
 }
 
 function generateId(): string {
     return crypto.randomUUID()
 }
 
-function parsedToSubject(parsed: ParsedSubject): Subject {
+function parsedToCourse(parsed: ParsedCourse): Course {
     return {
         id: generateId(),
         code: parsed.code,
@@ -49,7 +49,7 @@ export const useStore = create<Store>((set) => ({
         {
             id: generateId(),
             name: DEFAULT_SECTION_NAME,
-            subjects: [],
+            courses: [],
         },
     ],
 
@@ -64,7 +64,7 @@ export const useStore = create<Store>((set) => ({
                     {
                         id: generateId(),
                         name: `Section ${count}`,
-                        subjects: [],
+                        courses: [],
                     },
                 ],
             }
@@ -82,43 +82,43 @@ export const useStore = create<Store>((set) => ({
             sections: state.sections.filter((s) => s.id !== sectionId),
         })),
 
-    addSubjects: (sectionId, parsed) =>
+    addCourses: (sectionId, parsed) =>
         set((state) => ({
             sections: state.sections.map((s) =>
                 s.id === sectionId
-                    ? { ...s, subjects: [...s.subjects, ...parsed.map(parsedToSubject)] }
+                    ? { ...s, courses: [...s.courses, ...parsed.map(parsedToCourse)] }
                     : s
             ),
         })),
 
-    removeSubject: (sectionId, subjectId) =>
+    removeCourse: (sectionId, courseId) =>
         set((state) => ({
             sections: state.sections.map((s) =>
                 s.id === sectionId
-                    ? { ...s, subjects: s.subjects.filter((sub) => sub.id !== subjectId) }
+                    ? { ...s, courses: s.courses.filter((sub) => sub.id !== courseId) }
                     : s
             ),
         })),
 
-    toggleSubject: (sectionId, subjectId) =>
+    toggleCourse: (sectionId, courseId) =>
         set((state) => ({
             sections: state.sections.map((s) =>
                 s.id === sectionId
                     ? {
                           ...s,
-                          subjects: s.subjects.map((sub) =>
-                              sub.id === subjectId ? { ...sub, enabled: !sub.enabled } : sub
+                          courses: s.courses.map((sub) =>
+                              sub.id === courseId ? { ...sub, enabled: !sub.enabled } : sub
                           ),
                       }
                     : s
             ),
         })),
 
-    toggleAllSubjects: (sectionId, enabled) =>
+    toggleAllCourses: (sectionId, enabled) =>
         set((state) => ({
             sections: state.sections.map((s) =>
                 s.id === sectionId
-                    ? { ...s, subjects: s.subjects.map((sub) => ({ ...sub, enabled })) }
+                    ? { ...s, courses: s.courses.map((sub) => ({ ...sub, enabled })) }
                     : s
             ),
         })),
