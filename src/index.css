@@ -90,3 +90,11 @@
         transform: translateY(12px);
     }
 }
+
+* {
+    scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
