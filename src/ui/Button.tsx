@@ -1,4 +1,4 @@
-type Variant = "default" | "danger" | "primary"
+type Variant = "primary" | "secondary" | "default" | "danger"
 
 type Props = {
     onClick?: () => void
@@ -9,9 +9,10 @@ type Props = {
 }
 
 const variantClasses: Record<Variant, string> = {
-    default: "border border-gray-300 hover:bg-gray-50 text-gray-700",
-    danger: "border border-gray-300 text-red-500 hover:bg-red-50",
-    primary: "bg-gray-900 text-white hover:bg-gray-700 disabled:opacity-40 disabled:cursor-not-allowed",
+    primary: "bg-[var(--color-bootstrap-blue)] text-white hover:brightness-110",
+    secondary: "bg-[var(--color-accent)] text-[var(--color-accent-text)] hover:brightness-105",
+    default: "border border-[var(--color-border)] bg-white text-[var(--color-body)] hover:bg-[var(--color-page-bg)]",
+    danger: "border border-[var(--color-border)] text-red-500 bg-white hover:bg-red-50",
 }
 
 export default function Button({ onClick, disabled, variant = "default", children, className = "" }: Props) {
@@ -19,7 +20,7 @@ export default function Button({ onClick, disabled, variant = "default", childre
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`text-xs px-2 py-1 rounded ${variantClasses[variant]} ${className}`}
+            className={`text px-3 py-1 rounded-md ${variantClasses[variant]} ${className}`}
         >
             {children}
         </button>
