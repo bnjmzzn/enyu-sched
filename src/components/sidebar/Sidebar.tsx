@@ -14,20 +14,24 @@ export default function Sidebar({ open, onToggle }: Props) {
         <>
             <aside
                 className={`
-                    flex flex-col bg-white border-r border-gray-200 overflow-y-auto z-40
-                    fixed inset-y-0 left-0 w-80 transition-transform duration-200
+                    flex flex-col overflow-y-auto
+                    text-white
+                    bg-[var(--color-brand)]
+                    border-r-3 border-[var(--color-border)]
+                    fixed inset-y-0 left-0 z-40 w-80
+                    transition-transform duration-200
                     md:relative md:translate-x-0 md:flex md:w-80 md:shrink-0
                     ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
                 `}
             >
                 <div className="flex flex-col gap-3 p-4 flex-1">
                     <div className="flex items-center justify-between">
-                        <span className="text-sm font-semibold">sections</span>
-                        <Button onClick={addSection}>+ new section</Button>
+                    <span className="text-2xl font-extrabold tracking-normal">Sections</span>
+                        <Button variant="secondary" onClick={addSection}>Add Section</Button>
                     </div>
 
                     {sections.length === 0 && (
-                        <p className="text-xs text-gray-400">no sections yet.</p>
+                        <p className="text-gray-400">No sections yet.</p>
                     )}
 
                     {sections.map((section) => (
