@@ -93,6 +93,57 @@
     }
 }
 
+@layer utilities {
+    .hover-lift {
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .hover-lift:hover {
+        transform: scale(1.01);
+    }
+
+    .btn-press {
+        transition: transform 0.1s ease;
+    }
+    .btn-press:hover {
+        transform: scale(1.04);
+    }
+    .btn-press:active {
+        transform: scale(0.96);
+    }
+
+    .icon-btn-press {
+        transition: transform 0.1s ease;
+    }
+    .icon-btn-press:hover {
+        transform: scale(1.15);
+    }
+    .icon-btn-press:active {
+        transform: scale(0.88);
+    }
+}
+
+@keyframes panel-in {
+    from {
+        opacity: 0;
+        transform: scale(0.97) translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes panel-out {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.97) translateY(6px);
+    }
+}
+
 * {
     scrollbar-width: none;
 }
