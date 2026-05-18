@@ -1,4 +1,4 @@
-import { useValidation } from "../../lib/useValidation"
+import { useValidation } from "../../lib/hooks/useValidation"
 
 export default function ErrorList() {
     const { issues } = useValidation()

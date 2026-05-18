@@ -1,5 +1,5 @@
-import { useStore, type Course } from "./store/appStore"
-import { timeToMinutes } from "./time"
+import { useStore, type Course } from "../store/appStore"
+import { timeToMinutes } from "../time"
 
 export type Issue = {
     id: string
