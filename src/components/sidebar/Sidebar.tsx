@@ -1,4 +1,4 @@
-import { useStore } from "../../lib/store"
+import { useStore } from "../../lib/store/appStore"
 import SectionPanel from "./SectionPanel"
 import Button from "../../ui/Button"
 

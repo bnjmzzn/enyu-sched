@@ -1,4 +1,4 @@
-import { useStore } from "../../lib/store"
+import { useStore } from "../../lib/store/appStore"
 
 export default function CourseListPanel() {
     const sections = useStore((s) => s.sections)

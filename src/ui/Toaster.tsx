@@ -1,4 +1,4 @@
-import { useUI, type Toast } from "../lib/ui"
+import { useUI, type Toast } from "../lib/store/uiStore"
 
 function toastColors(type: Toast["type"]) {
     if (type === "success") return "bg-brand text-white"

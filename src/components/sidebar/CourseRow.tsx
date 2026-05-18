@@ -1,4 +1,4 @@
-import { type Course } from "../../lib/store"
+import { type Course } from "../../lib/store/appStore"
 import Checkbox from "../../ui/Checkbox"
 import Button from "../../ui/Button"
 

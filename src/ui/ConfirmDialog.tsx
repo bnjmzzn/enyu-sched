@@ -1,5 +1,5 @@
 import { createPortal } from "react-dom"
-import { useUI } from "../lib/ui"
+import { useUI } from "../lib/store/uiStore"
 
 export default function ConfirmDialog() {
     const { confirm, dismissConfirm } = useUI()

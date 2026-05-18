@@ -1,4 +1,4 @@
-import { useStore, type Course } from "./store"
+import { useStore, type Course } from "./store/appStore"
 import { timeToMinutes } from "./time"
 
 export type Issue = {

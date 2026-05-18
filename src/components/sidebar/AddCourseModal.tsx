@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { parseScheduleString, type ParsedCourse } from "../../lib/parser"
-import { useStore } from "../../lib/store"
+import { useStore } from "../../lib/store/appStore"
 import ParsedCourseCard from "./ParsedCourseCard"
 import Modal from "../../ui/Modal"
 import Button from "../../ui/Button"

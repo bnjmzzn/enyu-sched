@@ -1,6 +1,6 @@
 import { useState, useRef } from "react"
-import { useStore, type Section } from "../../lib/store"
-import { useUI } from "../../lib/ui"
+import { useStore, type Section } from "../../lib/store/appStore"
+import { useUI } from "../../lib/store/uiStore"
 
 export function useSectionPanel(section: Section) {
     const { renameSection, removeSection, toggleAllCourses } = useStore()

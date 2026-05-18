@@ -1,8 +1,8 @@
 import { useRef } from "react"
 import domtoimage from "dom-to-image"
-import { useStore } from "../../lib/store"
+import { useStore } from "../../lib/store/appStore"
 import { useValidation } from "../../lib/useValidation"
-import { useUI } from "../../lib/ui"
+import { useUI } from "../../lib/store/uiStore"
 import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 

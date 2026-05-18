@@ -1,6 +1,6 @@
 import { create } from "zustand"
-import type { ParsedCourse, Schedule } from "./parser"
-import { DEFAULT_MAX_UNITS, DEFAULT_SECTION_NAME } from "./config"
+import type { ParsedCourse, Schedule } from "../parser"
+import { DEFAULT_MAX_UNITS, DEFAULT_SECTION_NAME } from "../config"
 
 export type Course = {
     id: string
