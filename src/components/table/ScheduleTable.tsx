@@ -1,9 +1,18 @@
 import { useScheduleTable } from "../../lib/hooks/useScheduleTable"
 import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
+import type { Block } from "../../lib/hooks/useScheduleTable"
 
 type BlockProps = {
-    block: ReturnType<ReturnType<typeof useScheduleTable>["getBlocksForDay"]>[number]
+    block: Block
+}
+
+type DayColumnProps = {
+    day: string
+    hours: number[]
+    startHour: number
+    totalHeight: number
+    blocks: Block[]
 }
 
 function CourseBlock({ block }: BlockProps) {
@@ -22,14 +31,6 @@ function CourseBlock({ block }: BlockProps) {
             <span className="opacity-70 leading-tight block">{block.schedule.start} - {block.schedule.end}</span>
         </div>
     )
-}
-
-type DayColumnProps = {
-    day: string
-    hours: number[]
-    startHour: number
-    totalHeight: number
-    blocks: ReturnType<ReturnType<typeof useScheduleTable>["getBlocksForDay"]>
 }
 
 function DayColumn({ day, hours, startHour, totalHeight, blocks }: DayColumnProps) {

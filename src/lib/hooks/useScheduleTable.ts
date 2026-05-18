@@ -6,6 +6,23 @@ import { useUI } from "../../lib/store/uiStore"
 import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 
+export type Block = {
+    course: {
+        id: string
+        code: string
+        sectionName: string
+    }
+    schedule: {
+        day: string
+        start: string
+        end: string
+        room: string
+    }
+    top: number
+    height: number
+    isConflict: boolean
+}
+
 export function useScheduleTable() {
     const tableTitle = useStore((s) => s.tableTitle)
     const setTableTitle = useStore((s) => s.setTableTitle)
@@ -28,7 +45,7 @@ export function useScheduleTable() {
     const endHour = allSchedules.length > 0
         ? Math.min(24, Math.ceil(Math.max(...allSchedules.map((s) => timeToMinutes(s.end))) / 60) + 1)
         : DEFAULT_END_HOUR
-        
+
     const totalHeight = CELL_HEIGHT * (endHour - startHour)
     const hours = Array.from({ length: endHour - startHour }, (_, i) => startHour + i)
 
