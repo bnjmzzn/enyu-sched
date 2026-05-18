@@ -69,6 +69,7 @@ export function useExport() {
             link.download = `${tableTitle.trim() || "schedule"}.png`
             link.href = dataUrl
             link.click()
+            showToast("Exported as png", "success")
         } catch (err) {
             console.error("export failed", err)
             showToast("export failed", "error")
@@ -118,9 +119,9 @@ export function useExport() {
         }
 
         navigator.clipboard.writeText(lines.join("\n")).then(() => {
-            showToast("copied to clipboard", "success")
+            showToast("Copied to clipboard", "success")
         }).catch(() => {
-            showToast("failed to copy", "error")
+            showToast("Failed to copy", "error")
         })
     }
 
