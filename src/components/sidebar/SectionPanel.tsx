@@ -5,11 +5,79 @@ import AddCoursesModal from "./AddCourseModal"
 import Button from "../../ui/Button"
 import Checkbox from "../../ui/Checkbox"
 
-type Props = {
+type HeaderProps = {
     section: Section
+    collapsed: boolean
+    onToggle: () => void
+    editing: boolean
+    onEditStart: () => void
+    nameInput: string
+    onNameChange: (v: string) => void
+    onRename: () => void
+    allEnabled: boolean
+    isIndeterminate: boolean
+    onSectionToggle: () => void
+    onAdd: () => void
+    onRemove: () => void
 }
 
-export default function SectionPanel({ section }: Props) {
+function SectionHeader({
+    section,
+    collapsed,
+    onToggle,
+    editing,
+    onEditStart,
+    nameInput,
+    onNameChange,
+    onRename,
+    allEnabled,
+    isIndeterminate,
+    onSectionToggle,
+    onAdd,
+    onRemove,
+}: HeaderProps) {
+    return (
+        <div className="flex items-center gap-2 px-3 py-2 bg-gray-50">
+            <Checkbox
+                checked={allEnabled}
+                indeterminate={isIndeterminate}
+                onChange={onSectionToggle}
+            />
+
+            <button
+                onClick={onToggle}
+                className="text-gray-400 text-xs"
+            >
+                {collapsed ? "▶" : "▼"}
+            </button>
+
+            {editing ? (
+                <input
+                    autoFocus
+                    value={nameInput}
+                    onChange={(e) => onNameChange(e.target.value)}
+                    onBlur={onRename}
+                    onKeyDown={(e) => e.key === "Enter" && onRename()}
+                    className="flex-1 text-sm font-medium border-b border-gray-400 bg-transparent focus:outline-none"
+                />
+            ) : (
+                <button
+                    onClick={onEditStart}
+                    className="flex-1 text-sm font-medium text-left hover:text-gray-500 truncate"
+                >
+                    {section.name}
+                </button>
+            )}
+
+            <div className="flex items-center gap-1 shrink-0">
+                <Button onClick={onAdd}>+ add</Button>
+                <Button variant="danger" onClick={onRemove}>remove</Button>
+            </div>
+        </div>
+    )
+}
+
+export default function SectionPanel({ section }: { section: Section }) {
     const { toggleCourse, removeCourse } = useStore()
     const {
         collapsed, setCollapsed,
@@ -25,43 +93,21 @@ export default function SectionPanel({ section }: Props) {
 
     return (
         <div className="border border-gray-200 rounded-lg overflow-hidden">
-            <div className="flex items-center gap-2 px-3 py-2 bg-gray-50">
-                <Checkbox
-                    checked={allEnabled}
-                    indeterminate={isIndeterminate}
-                    onChange={handleSectionToggle}
-                />
-
-                <button
-                    onClick={() => setCollapsed((v) => !v)}
-                    className="text-gray-400 text-xs"
-                >
-                    {collapsed ? "▶" : "▼"}
-                </button>
-
-                {editing ? (
-                    <input
-                        autoFocus
-                        value={nameInput}
-                        onChange={(e) => setNameInput(e.target.value)}
-                        onBlur={handleRename}
-                        onKeyDown={(e) => e.key === "Enter" && handleRename()}
-                        className="flex-1 text-sm font-medium border-b border-gray-400 bg-transparent focus:outline-none"
-                    />
-                ) : (
-                    <button
-                        onClick={() => setEditing(true)}
-                        className="flex-1 text-sm font-medium text-left hover:text-gray-500 truncate"
-                    >
-                        {section.name}
-                    </button>
-                )}
-
-                <div className="flex items-center gap-1 shrink-0">
-                    <Button onClick={() => setShowModal(true)}>+ add</Button>
-                    <Button variant="danger" onClick={handleRemove}>remove</Button>
-                </div>
-            </div>
+            <SectionHeader
+                section={section}
+                collapsed={collapsed}
+                onToggle={() => setCollapsed((v) => !v)}
+                editing={editing}
+                onEditStart={() => setEditing(true)}
+                nameInput={nameInput}
+                onNameChange={setNameInput}
+                onRename={handleRename}
+                allEnabled={allEnabled}
+                isIndeterminate={isIndeterminate}
+                onSectionToggle={handleSectionToggle}
+                onAdd={() => setShowModal(true)}
+                onRemove={handleRemove}
+            />
 
             {!collapsed && (
                 <div className="px-3 py-2">
