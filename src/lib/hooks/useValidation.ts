@@ -46,7 +46,7 @@ export function useValidation(): ValidationResult {
     if (totalUnits > maxUnits) {
         issues.push({
             id: "over-limit",
-            message: `unit limit exceeded (${totalUnits.toFixed(1)} / ${maxUnits})`,
+            message: `UNIT LIMIT REACHED (${totalUnits.toFixed(1)} / ${maxUnits})`,
         })
     }
 
@@ -60,7 +60,7 @@ export function useValidation(): ValidationResult {
             seen.add(pairKey)
 
             if (a.code === b.code) {
-                issues.push({ id: pairKey, message: `duplicate: ${a.code}` })
+                issues.push({ id: pairKey, message: `DUPLICATE: ${a.code}` })
                 a.schedules.forEach((s) => conflictKeys.add(`${a.id}:${s.day}`))
                 b.schedules.forEach((s) => conflictKeys.add(`${b.id}:${s.day}`))
                 continue
@@ -71,7 +71,7 @@ export function useValidation(): ValidationResult {
 
             issues.push({
                 id: pairKey,
-                message: `${a.code} and ${b.code} overlap on ${overlappingDays.join(", ")}`,
+                message: `OVERLAP: ${a.code} and ${b.code} on ${overlappingDays.join(", ")}`,
             })
 
             overlappingDays.forEach((day) => {
