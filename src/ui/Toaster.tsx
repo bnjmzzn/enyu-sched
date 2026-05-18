@@ -25,7 +25,7 @@ export default function Toaster() {
                     key={toast.id}
                     onClick={() => dismissToast(toast.id)}
                     style={{ animation: "toast-in 0.2s ease forwards", borderRadius: "var(--radius-md)" }}
-                    className={`flex items-center gap-3 px-5 py-3 text-base font-medium shadow-lg cursor-pointer whitespace-nowrap border-3 border-border ${toastColors(toast.type)}`}
+                    className={`flex items-center gap-3 px-5 py-3 text-base font-medium cursor-pointer whitespace-nowrap border-3 border-border shadow-[0_4px_0_0_rgba(0,0,0,0.3)] ${toastColors(toast.type)}`}
                 >
                     <Icon icon={toastIcon(toast.type)} width={20} height={20} />
                     <span>{toast.message}</span>

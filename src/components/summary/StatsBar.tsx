@@ -30,7 +30,7 @@ export default function StatsBar() {
 
     return (
         <div
-            className="flex flex-wrap items-center gap-6 px-4 py-3 border-3 border-border rounded-lg bg-white hover-lift"
+            className="flex flex-wrap items-center gap-6 px-4 py-3 border-3 border-border rounded-lg bg-white hover-lift shadow-[0_4px_0_0_rgba(0,0,0,0.25)]"
             style={{ animation: "panel-in 0.2s ease forwards" }}
         >
             <div className="flex items-center gap-2">

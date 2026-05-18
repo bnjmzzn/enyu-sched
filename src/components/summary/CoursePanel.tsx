@@ -18,7 +18,7 @@ export default function CoursePanel() {
 
     return (
         <div
-            className="border-3 border-border rounded-lg bg-white hover-lift"
+            className="border-3 border-border rounded-lg bg-white hover-lift shadow-[0_4px_0_0_rgba(0,0,0,0.25)]"
             style={{ animation: "panel-in 0.2s ease forwards" }}
         >
             <table className="w-full">

@@ -22,9 +22,11 @@ export default function Button({ onClick, disabled, variant = "default", childre
             disabled={disabled}
             className={`
                 text px-3 py-1 rounded-md
-                transition-transform duration-100
-                hover:scale-105 active:scale-95
-                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:active:scale-100
+                transition-all duration-100
+                shadow-[0_4px_0_0_rgba(0,0,0,0.25)]
+                hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(0,0,0,0.25)]
+                active:translate-y-[4px] active:shadow-none
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-[0_4px_0_0_rgba(0,0,0,0.25)] disabled:active:translate-y-0 disabled:active:shadow-[0_4px_0_0_rgba(0,0,0,0.25)]
                 ${variantClasses[variant]} ${className}`}
         >
             {children}

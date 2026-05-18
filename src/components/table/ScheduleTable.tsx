@@ -69,8 +69,8 @@ export default function ScheduleTable() {
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="overflow-x-auto">
-                <div className={`bg-white p-4 rounded-lg border-3 ${tableBorder} w-fit min-w-full`}>
+            <div className="overflow-x-auto ">
+                <div className={`bg-white p-4 mb-1 rounded-lg border-3 ${tableBorder} w-fit min-w-full shadow-[0_4px_0_0_rgba(0,0,0,0.25)]`}>
                     <input
                         type="text"
                         value={tableTitle}

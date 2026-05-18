@@ -82,7 +82,7 @@ export default function SectionPanel({ section }: { section: Section }) {
     return (
         <div
             style={{ animation: "panel-in 0.2s ease forwards" }}
-            className="border-3 border-border rounded-lg bg-white text-black hover-lift hover:scale-[1.01] transition-transform duration-150"
+            className="border-3 border-border rounded-lg bg-white text-black hover-lift hover:scale-[1.01] transition-transform duration-150 shadow-[0_4px_0_0_rgba(0,0,0,0.25)]"
         >
             <SectionHeader
                 section={section}

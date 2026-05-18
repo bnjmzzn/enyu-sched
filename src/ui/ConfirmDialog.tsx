@@ -21,11 +21,11 @@ export default function ConfirmDialog() {
         <div
             onClick={handleCancel}
             style={{ animation: "backdrop-in 0.15s ease forwards" }}
-            className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 "
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-white border-3 border-border rounded-lg w-[400px] max-w-[calc(100vw-2rem)] p-6 flex flex-col gap-4 hover-lift"
+                className="bg-white border-3 border-border rounded-lg w-[400px] max-w-[calc(100vw-2rem)] p-6 flex flex-col gap-4 hover-lift shadow-[2px_0_6px_rgba(0,0,0,0.15)]"
                 style={{ animation: "modal-in 0.2s ease forwards" }}
             >
                 <div className="flex flex-col gap-1">
