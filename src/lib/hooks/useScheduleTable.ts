@@ -28,12 +28,13 @@ export function useScheduleTable() {
     const endHour = allSchedules.length > 0
         ? Math.min(24, Math.ceil(Math.max(...allSchedules.map((s) => timeToMinutes(s.end))) / 60) + 1)
         : DEFAULT_END_HOUR
-
-    const totalMinutes = (endHour - startHour) * 60
+        
     const totalHeight = CELL_HEIGHT * (endHour - startHour)
     const hours = Array.from({ length: endHour - startHour }, (_, i) => startHour + i)
 
     function getBlocksForDay(day: string) {
+        const totalMinutes = (endHour - startHour) * 60
+
         return enabledCourses.flatMap((course) =>
             course.schedules
                 .filter((s) => s.day === day)
