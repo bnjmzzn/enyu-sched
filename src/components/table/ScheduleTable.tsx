@@ -116,9 +116,9 @@ export default function ScheduleTable() {
                 </div>
             </div>
 
-            <div className="flex justify-end">
-                <Button onClick={handleExportText}>export txt</Button>
-                <Button onClick={handleExportPNG}>export png</Button>
+            <div className="flex justify-end gap-2">
+                <Button variant="secondary" onClick={handleExportText}>Export TXT</Button>
+                <Button variant="primary" onClick={handleExportPNG}>Export PNG</Button>
             </div>
         </div>
     )
