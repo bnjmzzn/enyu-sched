@@ -21,7 +21,7 @@ export default function ConfirmDialog() {
         <div
             onClick={handleCancel}
             style={{ animation: "backdrop-in 0.15s ease forwards" }}
-            className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
         >
             <div
                 onClick={(e) => e.stopPropagation()}

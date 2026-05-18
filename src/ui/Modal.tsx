@@ -14,7 +14,7 @@ export default function Modal({ onClose, title, children, footer }: Props) {
 
     return createPortal(
         <div onClick={handleBackdropClick} className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-            <div className="bg-white border-border border-3 rounded-lg w-[520px] max-h-[80vh] flex flex-col hover-lift">
+            <div className="bg-white border-border border-3 rounded-lg w-[520px] max-w-[calc(100vw-2rem)] max-h-[80vh] flex flex-col hover-lift">
                 {title && (
                     <div className="px-6 pt-6 pb-2 shrink-0">
                         <h2 className="text-xl font-bold">{title}</h2>
