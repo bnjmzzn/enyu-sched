@@ -2,6 +2,7 @@ import { useScheduleTable } from "../../lib/hooks/useScheduleTable"
 import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
 import type { Block } from "../../lib/hooks/useScheduleTable"
+import { useValidation } from "../../lib/hooks/useValidation"
 
 type BlockProps = {
     block: Block
@@ -54,6 +55,7 @@ function DayColumn({ day, hours, startHour, totalHeight, blocks }: DayColumnProp
 }
 
 export default function ScheduleTable() {
+    const { hasIssues } = useValidation()
     const {
         tableRef,
         hours,
@@ -67,9 +69,11 @@ export default function ScheduleTable() {
         setTableTitle,
     } = useScheduleTable()
 
+    const tableBorder = hasIssues ? "border border-red-300" : "border border-gray-200"
+
     return (
         <div className="flex flex-col gap-2">
-            <div ref={tableRef} className="overflow-auto bg-white p-2">
+            <div ref={tableRef} className={`bg-white p-2 rounded-lg ${tableBorder}`}>
                 <input
                     type="text"
                     value={tableTitle}

@@ -8,6 +8,7 @@ export type Issue = {
 
 export type ValidationResult = {
     issues: Issue[]
+    hasIssues: boolean
     conflictKeys: Set<string>
 }
 
@@ -80,5 +81,5 @@ export function useValidation(): ValidationResult {
         }
     }
 
-    return { issues, conflictKeys }
+    return { issues, conflictKeys, hasIssues: issues.length > 0 }
 }
