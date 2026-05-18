@@ -19,6 +19,7 @@ export default function Checkbox({ checked, indeterminate = false, onChange }: P
             type="checkbox"
             checked={checked}
             onChange={onChange}
+            className="size-4"
         />
     )
 }
