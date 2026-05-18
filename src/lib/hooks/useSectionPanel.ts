@@ -31,7 +31,7 @@ export function useSectionPanel(section: Section) {
             showConfirm({
                 title: `remove "${section.name}"?`,
                 message: `This section has ${count} course${count > 1 ? "s" : ""}. This cannot be undone.`,
-                confirmLabel: "remove section",
+                confirmLabel: "Remove section",
                 onConfirm: () => removeSection(section.id),
             })
             return
