@@ -14,12 +14,14 @@ export default function Checkbox({ checked, indeterminate = false, onChange }: P
     }, [indeterminate])
 
     return (
-        <input
-            ref={ref}
-            type="checkbox"
-            checked={checked}
-            onChange={onChange}
-            className="size-4"
-        />
+        <div className="hover:scale-110 active:scale-90 transition-transform duration-150 cursor-pointer">
+            <input
+                ref={ref}
+                type="checkbox"
+                checked={checked}
+                onChange={onChange}
+                className="size-4 cursor-pointer"
+            />
+        </div>
     )
 }

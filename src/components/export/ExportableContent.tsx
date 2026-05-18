@@ -6,6 +6,7 @@ import CoursePanel from "../summary/CoursePanel"
 
 function AnimatedSection({ children, dataSection }: { children: React.ReactNode; dataSection: string }) {
     const [mounted, setMounted] = useState(false)
+    const [animDone, setAnimDone] = useState(false)
 
     useEffect(() => {
         const id = requestAnimationFrame(() => setMounted(true))
@@ -15,10 +16,12 @@ function AnimatedSection({ children, dataSection }: { children: React.ReactNode;
     return (
         <div
             data-export-section={dataSection}
+            onAnimationEnd={() => setAnimDone(true)}
             style={{
                 opacity: mounted ? undefined : 0,
-                animation: mounted ? "panel-in 0.25s ease forwards" : "none",
+                animation: mounted && !animDone ? "panel-in 0.25s ease forwards" : "none",
             }}
+            className="hover:scale-[1.01] transition-transform duration-150"
         >
             {children}
         </div>
