@@ -12,7 +12,7 @@ const variantClasses: Record<Variant, string> = {
     primary: "bg-[var(--color-bootstrap-blue)] text-white hover:brightness-110",
     secondary: "bg-[var(--color-accent)] text-[var(--color-accent-text)] hover:brightness-105",
     default: "border border-[var(--color-border)] bg-white text-[var(--color-body)] hover:bg-[var(--color-page-bg)]",
-    danger: "border border-[var(--color-border)] text-red-500 bg-white hover:bg-red-50",
+    danger: "border border-[var(--color-border)] text-white bg-[var(--color-danger)] hover:brightness-90",
 }
 
 export default function Button({ onClick, disabled, variant = "default", children, className = "" }: Props) {

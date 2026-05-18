@@ -32,7 +32,7 @@ export default function AddCoursesModal({ sectionId, onClose }: Props) {
 
     const footer = (
         <div className="flex justify-end gap-2">
-            <Button onClick={onClose}>Cancel</Button>
+            <Button variant="danger" onClick={onClose}>Cancel</Button>
             <Button variant="primary" disabled={parsed.length === 0} onClick={handleConfirm}>
                 {addLabel}
             </Button>
@@ -40,20 +40,21 @@ export default function AddCoursesModal({ sectionId, onClose }: Props) {
     )
 
     return (
-        <Modal title="add courses" onClose={onClose} footer={footer}>
+        <Modal title="Add courses" onClose={onClose} footer={footer}>
             <div className="flex flex-col gap-4">
-                <textarea
-                    rows={8}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="paste your schedule here..."
-                    className="w-full border rounded p-2 font-mono resize-y focus:outline-none"
-                    autoFocus
-                />
+            <textarea
+                rows={8}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Paste your schedule here as a text"
+                className={`w-full border-2 rounded p-2 font-mono resize-y focus:outline-none
+                ${hasNoResults ? "border-red-500" : "border-border"}`}
+                autoFocus
+            />
 
-                <div className="flex flex-col gap-2">
-                    {isEmpty && <p className="">Paste something to see a preview.</p>}
-                    {hasNoResults && <p className="">No valid courses found. Check your input.</p>}
+                <div className="flex flex-col gap-2 font-mono">
+                    {isEmpty && <p className="text-gray-500">Paste something to see a preview</p>}
+                    {hasNoResults && <p className="text-red-500">No valid courses found. Check your input</p>}
                     {parsed.length > 0 && (
                         <>
                             <p className="">

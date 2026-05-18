@@ -1,4 +1,5 @@
 import { useValidation } from "../../lib/hooks/useValidation"
+import { Icon } from "@iconify/react"
 
 export default function ErrorList() {
     const { issues } = useValidation()
@@ -8,10 +9,16 @@ export default function ErrorList() {
     const sorted = [...issues].sort((a, b) => a.message.localeCompare(b.message))
 
     return (
-        <div className="border border-red-200 bg-red-50 rounded-lg px-3 py-2 flex flex-col gap-1">
-            {sorted.map((issue) => (
-                <span key={issue.id}>{issue.message}</span>
-            ))}
+        <div className="border-3 border-red-300 bg-red-50 rounded-lg flex flex-col">
+            <div className="flex items-center gap-2 px-3 py-2">
+                <Icon icon="lucide:triangle-alert" width={16} height={16} className="text-red-500 shrink-0" />
+                <span className="font-semibold text-red-700">Conflicts & Warnings</span>
+            </div>
+            <div className="flex flex-col gap-1 px-3 py-2">
+                {sorted.map((issue) => (
+                    <span key={issue.id} className="font-mono text-red-600">{issue.message}</span>
+                ))}
+            </div>
         </div>
     )
 }

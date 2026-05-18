@@ -2,8 +2,8 @@ import { useStore, type Section } from "../../lib/store/appStore"
 import { useSectionPanel } from "../../lib/hooks/useSectionPanel"
 import CourseRow from "./CourseRow"
 import AddCoursesModal from "./AddCourseModal"
-import Button from "../../ui/Button"
 import Checkbox from "../../ui/Checkbox"
+import IconButton from "../../ui/IconButton"
 
 type HeaderProps = {
     section: Section
@@ -57,8 +57,8 @@ function SectionHeader({
 
             {!editing && (
                 <div className="flex items-center gap-1 shrink-0">
-                    <Button onClick={onAdd}>+ add</Button>
-                    <Button variant="danger" onClick={onRemove}>remove</Button>
+                    <IconButton icon="lucide:plus" className="text-blue-500 hover:bg-blue-50" onClick={onAdd} />
+                    <IconButton icon="lucide:trash-2" className="text-red-500 hover:bg-red-50" onClick={onRemove} />
                 </div>
             )}
         </div>
@@ -79,7 +79,7 @@ export default function SectionPanel({ section }: { section: Section }) {
     } = useSectionPanel(section)
 
     return (
-        <div className="border-3 border-border rounded-md bg-white text-black">
+        <div className="border-3 border-border rounded-lg bg-white text-black">
             <SectionHeader
                 section={section}
                 editing={editing}
