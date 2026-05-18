@@ -1,8 +1,5 @@
-import { useRef } from "react"
-import domtoimage from "dom-to-image"
 import { useStore } from "../../lib/store/appStore"
 import { useValidation } from "../../lib/hooks/useValidation"
-import { useUI } from "../../lib/store/uiStore"
 import { timeToMinutes, formatHour } from "../../lib/time"
 import { CELL_HEIGHT, DEFAULT_START_HOUR, DEFAULT_END_HOUR } from "../../lib/config"
 
@@ -28,8 +25,6 @@ export function useScheduleTable() {
     const setTableTitle = useStore((s) => s.setTableTitle)
     const sections = useStore((s) => s.sections)
     const { conflictKeys } = useValidation()
-    const { showToast } = useUI()
-    const tableRef = useRef<HTMLDivElement>(null)
 
     const enabledCourses = sections.flatMap((section) => {
         const active = section.courses.filter((c) => c.enabled)
@@ -67,57 +62,13 @@ export function useScheduleTable() {
         )
     }
 
-    function handleExportPNG() {
-        if (!tableRef.current) return
-        domtoimage.toPng(tableRef.current).then((dataUrl) => {
-            const link = document.createElement("a")
-            link.download = "schedule.png"
-            link.href = dataUrl
-            link.click()
-        })
-    }
-
-    function handleExportText() {
-        const lines: string[] = []
-
-        if (tableTitle.trim().length > 0) {
-            lines.push(tableTitle.trim())
-            lines.push("")
-        }
-
-        const usedDays = [...new Set(enabledCourses.flatMap((c) => c.schedules.map((s) => s.day)))]
-
-        for (const day of usedDays) {
-            const blocks = getBlocksForDay(day)
-            if (blocks.length === 0) continue
-
-            lines.push(`[${day}]`)
-            lines.push("")
-
-            for (const block of blocks) {
-                lines.push(`${block.course.code} (${block.course.sectionName})`)
-                lines.push(`${block.schedule.start} - ${block.schedule.end} ${block.schedule.room}`)
-                lines.push("")
-            }
-        }
-
-        navigator.clipboard.writeText(lines.join("\n")).then(() => {
-            showToast("schedule copied to clipboard", "success")
-        }).catch(() => {
-            showToast("failed to copy to clipboard", "error")
-        })
-    }
-
     return {
-        tableRef,
         hours,
         startHour,
         totalHeight,
         getBlocksForDay,
-        handleExportPNG,
         formatHour,
         tableTitle,
         setTableTitle,
-        handleExportText,
     }
 }

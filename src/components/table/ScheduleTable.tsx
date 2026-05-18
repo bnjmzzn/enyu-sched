@@ -1,5 +1,4 @@
 import { useScheduleTable } from "../../lib/hooks/useScheduleTable"
-import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
 import type { Block } from "../../lib/hooks/useScheduleTable"
 import { useValidation } from "../../lib/hooks/useValidation"
@@ -57,13 +56,10 @@ function DayColumn({ day, hours, startHour, totalHeight, blocks }: DayColumnProp
 export default function ScheduleTable() {
     const { hasIssues } = useValidation()
     const {
-        tableRef,
         hours,
         startHour,
         totalHeight,
         getBlocksForDay,
-        handleExportPNG,
-        handleExportText,
         formatHour,
         tableTitle,
         setTableTitle,
@@ -74,7 +70,7 @@ export default function ScheduleTable() {
     return (
         <div className="flex flex-col gap-2">
             <div className="overflow-x-auto">
-                <div ref={tableRef} className={`bg-white p-4 rounded-lg border-3 ${tableBorder}`}>
+                <div className={`bg-white p-4 rounded-lg border-3 ${tableBorder} w-fit min-w-full`}>
                     <input
                         type="text"
                         value={tableTitle}
@@ -82,7 +78,7 @@ export default function ScheduleTable() {
                         placeholder="Schedule title..."
                         className="text-xl font-extrabold border-none focus:outline-none bg-transparent mb-3 block"
                     />
-
+    
                     <div className="min-w-[810px]">
                         <div className="flex mb-1 ml-10">
                             {DAYS.map((day) => (
@@ -91,7 +87,7 @@ export default function ScheduleTable() {
                                 </div>
                             ))}
                         </div>
-
+    
                         <div className="flex">
                             <div className="w-10 shrink-0 relative" style={{ height: totalHeight }}>
                                 {hours.map((hour) => (
@@ -104,7 +100,7 @@ export default function ScheduleTable() {
                                     </div>
                                 ))}
                             </div>
-
+    
                             <div className="flex flex-1 border-l border-t border-border rounded-md">
                                 {DAYS.map((day) => (
                                     <DayColumn
@@ -120,11 +116,6 @@ export default function ScheduleTable() {
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="flex justify-end gap-2">
-                <Button variant="secondary" onClick={handleExportText}>Export TXT</Button>
-                <Button variant="primary" onClick={handleExportPNG}>Export PNG</Button>
             </div>
         </div>
     )
