@@ -31,7 +31,11 @@ export const useUI = create<UIStore>((set) => ({
 
     showToast: (message, type = "info") => {
         const id = crypto.randomUUID()
-        set((s) => ({ toasts: [...s.toasts, { id, message, type }] }))
+        set((s) => {
+            const alreadyVisible = s.toasts.some((t) => t.message === message)
+            if (alreadyVisible) return s
+            return { toasts: [...s.toasts, { id, message, type }] }
+        })
         setTimeout(() => {
             set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) }))
         }, TOAST_DURATION_MS)
