@@ -37,23 +37,32 @@ export function useExport() {
             courselist: selection.courseList,
         }
     
+        // hide excluded sections and collect restores
+        const toRestore: Array<{ el: HTMLElement; display: string }> = []
+        root.querySelectorAll<HTMLElement>("[data-export-section]").forEach((el) => {
+            const section = el.getAttribute("data-export-section")
+            if (section && !sectionMap[section]) {
+                toRestore.push({ el, display: el.style.display })
+                el.style.display = "none"
+            }
+        })
+    
         const prevWidth = root.style.width
         const prevMinWidth = root.style.minWidth
         root.style.width = "900px"
         root.style.minWidth = "900px"
     
         await new Promise((resolve) => requestAnimationFrame(resolve))
+        await new Promise((resolve) => requestAnimationFrame(resolve))
     
         try {
             const dataUrl = await toPng(root, {
                 pixelRatio: 2,
                 backgroundColor: "#F8F9FA",
-                filter: (node) => {
-                    if (node instanceof HTMLElement) {
-                        const section = node.getAttribute("data-export-section")
-                        if (section && !sectionMap[section]) return false
-                    }
-                    return true
+                width: 900,
+                style: {
+                    width: "900px",
+                    minWidth: "900px",
                 },
             })
             const link = document.createElement("a")
@@ -66,6 +75,7 @@ export function useExport() {
         } finally {
             root.style.width = prevWidth
             root.style.minWidth = prevMinWidth
+            toRestore.forEach(({ el, display }) => (el.style.display = display))
         }
     }
 
