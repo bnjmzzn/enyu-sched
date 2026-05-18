@@ -1,6 +1,7 @@
 import { useStore } from "../../lib/store/appStore"
 import SectionPanel from "./SectionPanel"
 import Button from "../../ui/Button"
+import { Icon } from "@iconify/react"
 
 type Props = {
     open: boolean
@@ -39,12 +40,17 @@ export default function Sidebar({ open, onToggle }: Props) {
                     ))}
                 </div>
             </aside>
-
             <button
                 onClick={onToggle}
-                className="md:hidden fixed bottom-4 right-4 z-50 w-10 h-10 rounded-full bg-gray-900 text-white text-sm shadow-lg flex items-center justify-center"
+                className="md:hidden fixed bottom-4 right-4 z-50 w-12 h-12 rounded-full bg-[var(--color-brand)] text-white shadow-lg flex items-center justify-center transition-transform duration-200 hover:scale-110 active:scale-90 border-3 border-border"
             >
-                {open ? "✕" : "☰"}
+                <Icon
+                    icon={open ? "lucide:x" : "lucide:menu"}
+                    width={20}
+                    height={20}
+                    className="transition-transform duration-200 "
+                    style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)" }}
+                />
             </button>
         </>
     )
