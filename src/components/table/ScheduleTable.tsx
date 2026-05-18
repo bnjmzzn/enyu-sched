@@ -69,20 +69,20 @@ export default function ScheduleTable() {
         setTableTitle,
     } = useScheduleTable()
 
-    const tableBorder = hasIssues ? "border border-red-300" : "border border-gray-200"
+    const tableBorder = hasIssues ? "border border-red-300" : "border border-border"
 
     return (
         <div className="flex flex-col gap-2">
-            <div ref={tableRef} className={`bg-white p-2 rounded-lg ${tableBorder}`}>
+            <div ref={tableRef} className={`bg-white p-4 rounded-lg border-3 ${tableBorder}`}>
                 <input
                     type="text"
                     value={tableTitle}
                     onChange={(e) => setTableTitle(e.target.value)}
-                    placeholder="schedule title..."
-                    className="text-sm border-b border-gray-300 focus:outline-none mb-2"
+                    placeholder="Schedule title..."
+                    className="border-b border-border focus:outline-none mb-2"
                 />
 
-                <div className="flex text-xs text-gray-400 mb-1 ml-10">
+                <div className="flex mb-1 ml-10">
                     {DAYS.map((day) => (
                         <div key={day} className="flex-1 text-center">{day}</div>
                     ))}
@@ -93,7 +93,7 @@ export default function ScheduleTable() {
                         {hours.map((hour) => (
                             <div
                                 key={hour}
-                                className="absolute w-full text-right pr-1 text-xs text-gray-300"
+                                className="absolute w-full text-right pr-1"
                                 style={{ top: (hour - startHour) * CELL_HEIGHT - 6 }}
                             >
                                 {formatHour(hour)}
@@ -101,7 +101,7 @@ export default function ScheduleTable() {
                         ))}
                     </div>
 
-                    <div className="flex flex-1 border-l border-t border-gray-100">
+                    <div className="flex flex-1 border-l border-t border-border rounded-md">
                         {DAYS.map((day) => (
                             <DayColumn
                                 key={day}

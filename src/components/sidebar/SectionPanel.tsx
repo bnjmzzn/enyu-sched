@@ -96,7 +96,7 @@ export default function SectionPanel({ section }: { section: Section }) {
 
             <div className="px-3 py-2">
                 {section.courses.length === 0 && (
-                    <p>no courses yet.</p>
+                    <p>No courses yet</p>
                 )}
                 {section.courses.map((course) => (
                     <CourseRow

@@ -28,7 +28,7 @@ export default function StatsBar() {
     return (
         <div className="flex flex-wrap items-center gap-6 px-4 py-2 border border-gray-200 rounded-lg">
             <div className="flex items-center gap-1">
-                <span>units:</span>
+                <span>Units:</span>
                 <span>{totalUnits.toFixed(1)}</span>
                 <span>/</span>
                 <input
@@ -37,16 +37,16 @@ export default function StatsBar() {
                     onChange={(e) => setMaxUnits(Number(e.target.value))}
                     className="w-10 text-center border-b border-gray-300 focus:outline-none"
                 />
-                {isOverLimit && <span>over limit</span>}
+                {isOverLimit && <span>Over limit</span>}
             </div>
 
             <div className="flex items-center gap-1">
-                <span>f2f:</span>
+                <span>F2F:</span>
                 <span>{f2fDays.length > 0 ? f2fDays.join(", ") : "none"}</span>
             </div>
 
             <div className="flex items-center gap-1">
-                <span>online:</span>
+                <span>Online:</span>
                 <span>{onlineDays.length > 0 ? onlineDays.join(", ") : "none"}</span>
             </div>
         </div>

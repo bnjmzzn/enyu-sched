@@ -42,14 +42,14 @@ export default function ConfirmDialog() {
                         style={{ borderRadius: "var(--radius-md)", border: "1px solid var(--color-border)" }}
                         className="text-xs px-3 py-1.5 text-[var(--color-muted)] hover:bg-[var(--color-page-bg)] transition-colors"
                     >
-                        {confirm.cancelLabel ?? "cancel"}
+                        {confirm.cancelLabel ?? "Cancel"}
                     </button>
                     <button
                         onClick={handleConfirm}
                         style={{ borderRadius: "var(--radius-md)" }}
                         className="text-xs px-3 py-1.5 bg-red-500 text-white hover:bg-red-600 transition-colors"
                     >
-                        {confirm.confirmLabel ?? "confirm"}
+                        {confirm.confirmLabel ?? "Confirm"}
                     </button>
                 </div>
             </div>

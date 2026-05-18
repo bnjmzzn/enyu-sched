@@ -32,7 +32,7 @@ export default function AddCoursesModal({ sectionId, onClose }: Props) {
 
     const footer = (
         <div className="flex justify-end gap-2">
-            <Button onClick={onClose}>cancel</Button>
+            <Button onClick={onClose}>Cancel</Button>
             <Button variant="primary" disabled={parsed.length === 0} onClick={handleConfirm}>
                 {addLabel}
             </Button>
@@ -47,17 +47,17 @@ export default function AddCoursesModal({ sectionId, onClose }: Props) {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="paste your schedule here..."
-                    className="w-full border border-gray-300 rounded p-2 text-sm font-mono resize-y focus:outline-none"
+                    className="w-full border rounded p-2 font-mono resize-y focus:outline-none"
                     autoFocus
                 />
 
                 <div className="flex flex-col gap-2">
-                    {isEmpty && <p className="text-sm text-gray-400">paste something to see a preview.</p>}
-                    {hasNoResults && <p className="text-sm text-red-400">no valid courses found. check your input.</p>}
+                    {isEmpty && <p className="">Paste something to see a preview.</p>}
+                    {hasNoResults && <p className="">No valid courses found. Check your input.</p>}
                     {parsed.length > 0 && (
                         <>
-                            <p className="text-xs text-gray-400">
-                                found {parsed.length} course{parsed.length > 1 ? "s" : ""}
+                            <p className="">
+                                Found {parsed.length} course{parsed.length > 1 ? "s" : ""}
                             </p>
                             {parsed.map((course) => (
                                 <ParsedCourseCard key={course.code} course={course} />
