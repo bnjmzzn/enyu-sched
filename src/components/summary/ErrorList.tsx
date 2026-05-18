@@ -5,11 +5,12 @@ export default function ErrorList() {
 
     if (issues.length === 0) return null
 
+    const sorted = [...issues].sort((a, b) => a.message.localeCompare(b.message))
+
     return (
-        <div className="flex flex-wrap items-center gap-2 px-4 py-2 border border-red-200 bg-red-50 rounded-lg">
-            <span className="text-xs font-semibold text-red-500 shrink-0">issues:</span>
-            {issues.map((issue) => (
-                <span key={issue.id} className="text-xs text-red-400">{issue.message}</span>
+        <div className="border border-red-200 bg-red-50 rounded-lg px-3 py-2 flex flex-col gap-1">
+            {sorted.map((issue) => (
+                <span key={issue.id}>{issue.message}</span>
             ))}
         </div>
     )
