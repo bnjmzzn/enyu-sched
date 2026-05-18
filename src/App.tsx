@@ -28,8 +28,8 @@ export default function App() {
 
             <div className="flex flex-col flex-1 overflow-scroll p-4 gap-3 min-w-0">
                 <ScheduleTable />
-                <StatsBar />
                 <ConflictList />
+                <StatsBar />
                 <CourseListPanel />
             </div>
 
