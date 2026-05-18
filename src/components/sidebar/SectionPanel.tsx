@@ -1,5 +1,5 @@
 import { useStore, type Section } from "../../lib/store/appStore"
-import { useSectionPanel } from "./useSectionPanel"
+import { useSectionPanel } from "../../lib/hooks/useSectionPanel"
 import CourseRow from "./CourseRow"
 import AddCoursesModal from "./AddCourseModal"
 import Button from "../../ui/Button"

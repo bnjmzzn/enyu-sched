@@ -1,4 +1,4 @@
-import { useStore } from "./store/appStore"
+import { useStore } from "../store/appStore"
 
 export function useStatsBar() {
     const { maxUnits, setMaxUnits, sections } = useStore()

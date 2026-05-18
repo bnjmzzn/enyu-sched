@@ -1,4 +1,4 @@
-import { useStatsBar } from "../../lib/useStatsbar"
+import { useStatsBar } from "../../lib/hooks/useStatsbar"
 
 export default function StatsBar() {
     const { maxUnits, setMaxUnits, totalUnits, isOverLimit, f2fDays, onlineDays } = useStatsBar()

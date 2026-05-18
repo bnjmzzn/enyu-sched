@@ -1,4 +1,4 @@
-import { useScheduleTable } from "./useScheduleTable"
+import { useScheduleTable } from "../../lib/hooks/useScheduleTable"
 import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
 
