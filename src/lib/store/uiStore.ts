@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { TOAST_DURATION_MS } from "../config"
 
 export type Toast = {
     id: string
@@ -33,7 +34,7 @@ export const useUI = create<UIStore>((set) => ({
         set((s) => ({ toasts: [...s.toasts, { id, message, type }] }))
         setTimeout(() => {
             set((s) => ({ toasts: s.toasts.filter((t) => t.id !== id) }))
-        }, 3000)
+        }, TOAST_DURATION_MS)
     },
 
     dismissToast: (id) =>
