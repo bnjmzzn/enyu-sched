@@ -17,12 +17,10 @@ export function useExport() {
 
     const [selection, setSelection] = useState<ExportSelection>({
         table: true,
-        errors: true,
+        errors: false,
         summary: true,
-        courseList: true,
+        courseList: false,
     })
-
-    const hasSelection = Object.values(selection).some(Boolean)
 
     function toggleSelection(key: keyof ExportSelection) {
         setSelection((prev) => ({ ...prev, [key]: !prev[key] }))
@@ -33,7 +31,7 @@ export function useExport() {
         if (!root) return
     
         const sectionMap: Record<string, boolean> = {
-            table: selection.table,
+            table: true,
             errors: selection.errors,
             summary: selection.summary,
             courselist: selection.courseList,
@@ -118,7 +116,6 @@ export function useExport() {
 
     return {
         selection,
-        hasSelection,
         toggleSelection,
         handleExportPNG,
         handleExportText,
