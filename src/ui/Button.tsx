@@ -20,8 +20,11 @@ export default function Button({ onClick, disabled, variant = "default", childre
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`text px-3 py-1 rounded-md ${variantClasses[variant]} ${className}`}
-        >
+            className={`
+                text px-3 py-1 rounded-md
+                disabled:opacity-50 disabled:cursor-not-allowed
+                ${variantClasses[variant]} ${className}`}
+            >
             {children}
         </button>
     )
