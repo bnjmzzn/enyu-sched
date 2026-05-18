@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { useStore, type Section } from "../../lib/store/appStore"
 import { useUI } from "../../lib/store/uiStore"
 
@@ -9,7 +9,6 @@ export function useSectionPanel(section: Section) {
     const [showModal, setShowModal] = useState(false)
     const [editing, setEditing] = useState(false)
     const [nameInput, setNameInput] = useState(section.name)
-    const checkboxRef = useRef<HTMLInputElement>(null)
 
     const allEnabled = section.courses.every((s) => s.enabled)
     const someEnabled = section.courses.some((s) => s.enabled)
@@ -45,7 +44,6 @@ export function useSectionPanel(section: Section) {
         showModal, setShowModal,
         editing, setEditing,
         nameInput, setNameInput,
-        checkboxRef,
         allEnabled,
         isIndeterminate,
         handleSectionToggle,
