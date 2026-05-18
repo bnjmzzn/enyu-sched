@@ -17,7 +17,10 @@ export default function CoursePanel() {
     if (rows.length === 0) return null
 
     return (
-        <div className="border-3 border-border rounded-lg bg-white">
+        <div
+            className="border-3 border-border rounded-lg bg-white hover-lift"
+            style={{ animation: "panel-in 0.2s ease forwards" }}
+        >
             <table className="w-full">
                 <thead>
                     <tr className="border-b border-border text-left text-sm text-[var(--color-muted)]">

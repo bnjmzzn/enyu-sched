@@ -29,7 +29,10 @@ export default function StatsBar() {
     const unitsColor = isOverLimit ? "text-red-500" : ""
 
     return (
-        <div className="flex flex-wrap items-center gap-6 px-4 py-3 border-3 border-border rounded-lg bg-white">
+        <div
+            className="flex flex-wrap items-center gap-6 px-4 py-3 border-3 border-border rounded-lg bg-white hover-lift"
+            style={{ animation: "panel-in 0.2s ease forwards" }}
+        >
             <div className="flex items-center gap-2">
                 <Icon icon="lucide:book-open" width={20} height={20} className="text-[var(--color-muted)]" />
                 <span className="text-sm text-[var(--color-muted)]">Units</span>

@@ -27,7 +27,10 @@ export default function ExportPanel() {
     const { selection, toggleSelection, handleExportPNG, handleExportText } = useExport()
 
     return (
-        <div className="border-3 border-border rounded-lg bg-white px-4 py-3 flex flex-wrap items-center gap-4">
+        <div
+            className="border-3 border-border rounded-lg bg-white px-4 py-3 flex flex-wrap items-center gap-4 hover-lift"
+            style={{ animation: "panel-in 0.2s ease forwards" }}
+        >
             <span className="font-semibold text-sm">Export</span>
 
             <div className="flex flex-wrap items-center gap-4">

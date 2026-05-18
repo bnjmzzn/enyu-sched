@@ -29,7 +29,7 @@ export default function ConfirmDialog() {
                     borderRadius: "var(--radius-lg)",
                     boxShadow: "var(--shadow-card)",
                 }}
-                className="bg-white w-[400px] max-w-[calc(100vw-2rem)] p-6 flex flex-col gap-4"
+                className="bg-white w-[400px] max-w-[calc(100vw-2rem)] p-6 flex flex-col gap-4 hover-lift"
             >
                 <div className="flex flex-col gap-1">
                     <h3 className="text-sm font-semibold text-[var(--color-body)]">{confirm.title}</h3>

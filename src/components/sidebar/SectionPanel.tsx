@@ -4,6 +4,7 @@ import CourseRow from "./CourseRow"
 import AddCoursesModal from "./AddCourseModal"
 import Checkbox from "../../ui/Checkbox"
 import IconButton from "../../ui/IconButton"
+import { useEffect, useRef, useState } from "react"
 
 type HeaderProps = {
     section: Section
@@ -79,7 +80,10 @@ export default function SectionPanel({ section }: { section: Section }) {
     } = useSectionPanel(section)
 
     return (
-        <div className="border-3 border-border rounded-lg bg-white text-black">
+        <div
+            style={{ animation: "panel-in 0.2s ease forwards" }}
+            className="border-3 border-border rounded-lg bg-white text-black hover-lift"
+        >
             <SectionHeader
                 section={section}
                 editing={editing}
@@ -95,9 +99,7 @@ export default function SectionPanel({ section }: { section: Section }) {
             />
 
             <div className="px-3 py-2">
-                {section.courses.length === 0 && (
-                    <p>No courses yet</p>
-                )}
+                {section.courses.length === 0 && <p>No courses yet</p>}
                 {section.courses.map((course) => (
                     <CourseRow
                         key={course.id}

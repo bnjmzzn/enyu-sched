@@ -22,7 +22,7 @@ function CourseBlock({ block }: BlockProps) {
 
     return (
         <div
-            className={`absolute inset-x-0.5 rounded text-xs p-1 overflow-hidden ${blockClass}`}
+            className={`absolute inset-x-0.5 rounded text-xs p-1 overflow-hidden transition-transform duration-100 hover:scale-[1.02] hover:z-10 cursor-default ${blockClass}`}
             style={{ top: block.top, height: block.height }}
         >
             <span className="font-semibold leading-tight block">{block.course.code}</span>

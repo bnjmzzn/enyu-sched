@@ -9,7 +9,10 @@ export default function ErrorList() {
     const sorted = [...issues].sort((a, b) => a.message.localeCompare(b.message))
 
     return (
-        <div className="border-3 border-red-300 bg-red-50 rounded-lg flex flex-col">
+        <div
+            className="border-3 border-red-300 bg-red-50 rounded-lg flex flex-col hover-lift"
+            style={{ animation: "panel-in 0.2s ease forwards" }}
+        >
             <div className="flex items-center gap-2 px-3 py-2">
                 <Icon icon="lucide:triangle-alert" width={16} height={16} className="text-red-500 shrink-0" />
                 <span className="font-semibold text-red-700">Conflicts & Warnings</span>

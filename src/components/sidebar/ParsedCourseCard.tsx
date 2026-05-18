@@ -7,7 +7,7 @@ type Props = {
 
 export default function ParsedCourseCard({ course }: Props) {
     return (
-        <Card>
+        <Card className="hover-lift">
             <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold">{course.code}</span>
                 <span className="text-sm font-semibold">{course.unit.toFixed(1)} units</span>
