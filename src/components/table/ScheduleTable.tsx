@@ -2,6 +2,56 @@ import { useScheduleTable } from "../../lib/hooks/useScheduleTable"
 import Button from "../../ui/Button"
 import { DAYS, CELL_HEIGHT } from "../../lib/config"
 
+type BlockProps = {
+    block: ReturnType<ReturnType<typeof useScheduleTable>["getBlocksForDay"]>[number]
+}
+
+function CourseBlock({ block }: BlockProps) {
+    const blockClass = block.isConflict
+        ? "bg-red-100 border border-red-300 text-red-700 opacity-50"
+        : "bg-blue-100 border border-blue-200 text-blue-800"
+
+    return (
+        <div
+            className={`absolute inset-x-0.5 rounded text-xs p-1 overflow-hidden ${blockClass}`}
+            style={{ top: block.top, height: block.height }}
+        >
+            <span className="font-semibold leading-tight block">{block.course.code}</span>
+            <span className="opacity-70 leading-tight block">{block.schedule.room}</span>
+            <span className="opacity-70 leading-tight block">{block.course.sectionName}</span>
+            <span className="opacity-70 leading-tight block">{block.schedule.start} - {block.schedule.end}</span>
+        </div>
+    )
+}
+
+type DayColumnProps = {
+    day: string
+    hours: number[]
+    startHour: number
+    totalHeight: number
+    blocks: ReturnType<ReturnType<typeof useScheduleTable>["getBlocksForDay"]>
+}
+
+function DayColumn({ day, hours, startHour, totalHeight, blocks }: DayColumnProps) {
+    return (
+        <div
+            className="flex-1 relative border-r border-gray-100"
+            style={{ height: totalHeight }}
+        >
+            {hours.map((hour) => (
+                <div
+                    key={hour}
+                    className="absolute w-full border-b border-gray-100"
+                    style={{ top: (hour - startHour) * CELL_HEIGHT, height: CELL_HEIGHT }}
+                />
+            ))}
+            {blocks.map((block, i) => (
+                <CourseBlock key={`${block.course.id}-${i}`} block={block} />
+            ))}
+        </div>
+    )
+}
+
 export default function ScheduleTable() {
     const {
         tableRef,
@@ -13,13 +63,12 @@ export default function ScheduleTable() {
         handleExportText,
         formatHour,
         tableTitle,
-        setTableTitle
+        setTableTitle,
     } = useScheduleTable()
 
     return (
         <div className="flex flex-col gap-2">
             <div ref={tableRef} className="overflow-auto bg-white p-2">
-
                 <input
                     type="text"
                     value={tableTitle}
@@ -48,45 +97,20 @@ export default function ScheduleTable() {
                     </div>
 
                     <div className="flex flex-1 border-l border-t border-gray-100">
-                        {DAYS.map((day) => {
-                            const blocks = getBlocksForDay(day)
-
-                            return (
-                                <div
-                                    key={day}
-                                    className="flex-1 relative border-r border-gray-100"
-                                    style={{ height: totalHeight }}
-                                >
-                                    {hours.map((hour) => (
-                                        <div
-                                            key={hour}
-                                            className="absolute w-full border-b border-gray-100"
-                                            style={{ top: (hour - startHour) * CELL_HEIGHT, height: CELL_HEIGHT }}
-                                        />
-                                    ))}
-
-                                    {blocks.map((block, i) => (
-                                        <div
-                                            key={`${block.course.id}-${i}`}
-                                            className={`absolute inset-x-0.5 rounded text-xs p-1 overflow-hidden ${
-                                                block.isConflict
-                                                    ? "bg-red-100 border border-red-300 text-red-700 opacity-50"
-                                                    : "bg-blue-100 border border-blue-200 text-blue-800"
-                                            }`}
-                                            style={{ top: block.top, height: block.height }}
-                                        >
-                                            <span className="font-semibold leading-tight block">{block.course.code}</span>
-                                            <span className="opacity-70 leading-tight block">{block.schedule.room}</span>
-                                            <span className="opacity-70 leading-tight block">{block.course.sectionName}</span>
-                                            <span className="opacity-70 leading-tight block">{block.schedule.start} - {block.schedule.end}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            )
-                        })}
+                        {DAYS.map((day) => (
+                            <DayColumn
+                                key={day}
+                                day={day}
+                                hours={hours}
+                                startHour={startHour}
+                                totalHeight={totalHeight}
+                                blocks={getBlocksForDay(day)}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>
+
             <div className="flex justify-end">
                 <Button onClick={handleExportText}>export txt</Button>
                 <Button onClick={handleExportPNG}>export png</Button>
