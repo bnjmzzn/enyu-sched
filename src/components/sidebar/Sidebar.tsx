@@ -18,7 +18,7 @@ export default function Sidebar({ open, onToggle }: Props) {
                     flex flex-col overflow-y-auto
                     text-white
                     bg-[var(--color-brand)]
-                    border-r-3 border-[var(--color-border)]
+                    shadow-[2px_0_6px_rgba(0,0,0,0.15)]
                     fixed inset-y-0 left-0 z-40 w-80
                     transition-transform duration-200
                     md:relative md:translate-x-0 md:flex md:w-80 md:shrink-0
