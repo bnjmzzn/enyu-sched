@@ -1,28 +1,40 @@
 import { useStore } from "../../lib/store/appStore"
 
-export default function CourseListPanel() {
+export default function CoursePanel() {
     const sections = useStore((s) => s.sections)
 
-    const activeSections = sections
-        .map((s) => ({
-            ...s,
-            courses: s.courses.filter((c) => c.enabled),
-        }))
-        .filter((s) => s.courses.length > 0)
+    const rows = sections.flatMap((section) =>
+        section.courses
+            .filter((course) => course.enabled)
+            .map((course) => ({
+                id: course.id,
+                code: course.code,
+                section: section.name,
+                schedules: course.schedules.map((s) => `${s.day} ${s.start} - ${s.end} · ${s.room}`),
+            }))
+    )
 
-    if (activeSections.length === 0) return null
+    if (rows.length === 0) return null
 
     return (
-        <div className="flex flex-col">
-            {activeSections.flatMap((section) =>
-                section.courses.map((course) => (
-                    <div key={course.id} className="flex items-center gap-2 py-1">
-                        <span>{course.code}</span>
-                        <span>{section.name}</span>
-                        <span>{course.unit.toFixed(1)}</span>
-                    </div>
-                ))
-            )}
+        <div className="border border-gray-200 rounded-lg">
+            <table className="w-full">
+                <tbody>
+                    {rows.map((row) => (
+                        <tr key={row.id} className="border-t border-gray-100 align-top">
+                            <td className="px-3 py-2 whitespace-nowrap">
+                                {row.code}
+                                <span className="ml-2 text-gray-400">{row.section}</span>
+                            </td>
+                            <td className="px-3 py-2">
+                                {row.schedules.map((sched, i) => (
+                                    <div key={i}>{sched}</div>
+                                ))}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 }
