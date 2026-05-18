@@ -23,10 +23,13 @@ export default function App() {
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
+            
 
             <div className="flex flex-col flex-1 overflow-scroll p-4 gap-3 min-w-0">
-                <ExportableContent />
-                <ExportPanel />
+                <div className="flex flex-col gap-3 pb-">
+                    <ExportableContent />
+                    <ExportPanel />
+                </div>
             </div>
 
             <Toaster />
