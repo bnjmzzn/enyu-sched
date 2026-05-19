@@ -33,7 +33,7 @@ function CourseBlock({ block }: BlockProps) {
     )
 }
 
-function DayColumn({ day, hours, startHour, totalHeight, blocks }: DayColumnProps) {
+function DayColumn({ hours, startHour, totalHeight, blocks }: DayColumnProps) {
     return (
         <div
             className="relative border-r border-gray-100 min-w-[110px] flex-1"

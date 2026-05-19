@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import ScheduleTable from "../table/ScheduleTable"
 import ErrorList from "../summary/ErrorList"
 import StatsBar from "../summary/StatsBar"

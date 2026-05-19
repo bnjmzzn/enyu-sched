@@ -4,7 +4,6 @@ import CourseRow from "./CourseRow"
 import AddCoursesModal from "./AddCourseModal"
 import Checkbox from "../../ui/Checkbox"
 import IconButton from "../../ui/IconButton"
-import { useEffect, useRef, useState } from "react"
 
 type HeaderProps = {
     section: Section
