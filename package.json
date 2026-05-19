@@ -12,6 +12,7 @@
   "dependencies": {
     "@iconify/react": "6.0.2",
     "dom-to-image": "2.6.0",
+    "html-to-image": "1.11.13",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "zustand": "5.0.13"
