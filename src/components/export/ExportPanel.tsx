@@ -1,5 +1,6 @@
 import { useExport } from "../../lib/hooks/useExport"
 import Button from "../../ui/Button"
+import Checkbox from "../../ui/Checkbox"
 
 type CheckboxRowProps = {
     label: string
@@ -10,14 +11,8 @@ type CheckboxRowProps = {
 
 function CheckboxRow({ label, checked, onChange, disabled = false }: CheckboxRowProps) {
     return (
-        <label className={`flex items-center gap-2 select-none ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}>
-            <input
-                type="checkbox"
-                checked={checked}
-                onChange={onChange}
-                disabled={disabled}
-                className="size-4"
-            />
+        <label className={`flex items-center gap-2 select-none ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer"}`}>
+            <Checkbox checked={checked} onChange={onChange} />
             <span className="text-sm">{label}</span>
         </label>
     )
@@ -34,12 +29,7 @@ export default function ExportPanel() {
             <span className="font-semibold text-sm">Export</span>
 
             <div className="flex flex-wrap items-center gap-4">
-                <CheckboxRow
-                    label="Table"
-                    checked={true}
-                    onChange={() => {}}
-                    disabled
-                />
+                <CheckboxRow label="Table" checked={true} onChange={() => {}} disabled />
                 <CheckboxRow label="Errors" checked={selection.errors} onChange={() => toggleSelection("errors")} />
                 <CheckboxRow label="Summary" checked={selection.summary} onChange={() => toggleSelection("summary")} />
                 <CheckboxRow label="Course list" checked={selection.courseList} onChange={() => toggleSelection("courseList")} />
