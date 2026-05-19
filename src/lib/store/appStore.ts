@@ -46,7 +46,7 @@ function parsedToCourse(parsed: ParsedCourse): Course {
 }
 
 export const useStore = create<Store>((set) => ({
-    tableTitle: "My Table",
+    tableTitle: "Tap to edit table name",
     setTableTitle: (title) => set({ tableTitle: title }),
 
     maxUnits: DEFAULT_MAX_UNITS,
