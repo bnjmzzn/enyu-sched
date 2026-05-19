@@ -15,7 +15,7 @@ export default function App() {
     }, [])
 
     return (
-        <div className="flex h-screen overflow-hidden">
+        <div className="flex h-screen overflow-hidden select-none">
             <Sidebar open={sidebarOpen} onToggle={() => setSidebarOpen((v) => !v)} />
 
             {sidebarOpen && (
