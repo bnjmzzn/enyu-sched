@@ -42,24 +42,32 @@ export default function AddCoursesModal({ sectionId, onClose }: Props) {
     return (
         <Modal title="Add courses" onClose={onClose} footer={footer}>
             <div className="flex flex-col gap-4">
-            <textarea
-                rows={8}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Paste your schedule here as a text"
-                className={`w-full border-2 rounded p-2 font-mono resize-y focus:outline-none
-                ${hasNoResults ? "border-red-500" : "border-border"}`}
-                autoFocus
-            />
+                <textarea
+                    rows={8}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Paste your schedule here as a text"
+                    className={`w-full border-2 rounded p-2 font-mono resize-y focus:outline-none
+                    ${hasNoResults ? "border-red-500" : "border-border"}`}
+                    autoFocus
+                />
 
                 <div className="flex flex-col gap-2 font-mono">
-                    {isEmpty && <p className="text-gray-500">Paste something to see a preview</p>}
+                    {isEmpty && (
+                    <div>
+                        <p className="text-gray-500 text-sm">Copy and paste from the student portal.</p>
+                        <ul className="text-gray-500 text-sm list-disc list-inside">
+                            <li>Registration page table</li>
+                            <li>Registered courses table</li>
+                            <li>Assessment PDF table</li>
+                        </ul>
+                        <p className="text-gray-500 text-sm">Paste one format at a time.</p>
+                    </div>
+                    )}
                     {hasNoResults && <p className="text-red-500">No valid courses found. Check your input</p>}
                     {parsed.length > 0 && (
                         <>
-                            <p className="">
-                                Found {parsed.length} course{parsed.length > 1 ? "s" : ""}
-                            </p>
+                            <p>Found {parsed.length} course{parsed.length > 1 ? "s" : ""}</p>
                             {parsed.map((course) => (
                                 <ParsedCourseCard key={course.code} course={course} />
                             ))}
