@@ -1,4 +1,4 @@
-# enyu-sched
+# 📖 enyu-sched
 
 ![React](https://img.shields.io/badge/React-23272f?logo=react&logoColor=61dafb&style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-23272f?logo=typescript&logoColor=3178c6&style=for-the-badge)
@@ -7,11 +7,13 @@
 
 Generate a visualized weekly schedule table from plain text. Built around one university's student portal schedule format.
 
+🔗 Live site: https://bnjmzzn.github.io/enyu-sched/
+
+![enyu-sched preview](https://bnjmzzn.github.io/enyu-sched/banner.png)
+
 > **Note:** Schedule formats may change at any time. This tool may break without notice.
 
-<!-- screenshots soon -->
-
-## Features
+## ✨ Features
 
 - Paste raw schedule text and parse it automatically
 - Visual weekly table with time blocks
@@ -23,7 +25,7 @@ Generate a visualized weekly schedule table from plain text. Built around one un
 
 ---
 
-## Tech Stack
+## 🚀 Tech Stack
 
 - **Vite**
 - **React**
@@ -34,12 +36,12 @@ Generate a visualized weekly schedule table from plain text. Built around one un
 
 ---
 
-## Development
+## 👨‍🍳 Development
 
 Clone the repo and install dependencies with [pnpm](https://pnpm.io):
 
 ```bash
-git clone <this repo>
+git clone https://github.com/bnjmzzn/enyu-sched.git
 cd enyu-sched
 pnpm install
 pnpm run dev
