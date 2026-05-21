@@ -5,7 +5,6 @@ import { useUI } from "../../lib/store/uiStore"
 export function useSectionPanel(section: Section) {
     const { renameSection, removeSection, toggleAllCourses } = useStore()
     const { showConfirm } = useUI()
-    const [collapsed, setCollapsed] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [editing, setEditing] = useState(false)
     const [nameInput, setNameInput] = useState(section.name)
@@ -40,7 +39,6 @@ export function useSectionPanel(section: Section) {
     }
 
     return {
-        collapsed, setCollapsed,
         showModal, setShowModal,
         editing, setEditing,
         nameInput, setNameInput,
